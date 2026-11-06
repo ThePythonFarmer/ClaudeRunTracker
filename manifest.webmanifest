@@ -1,9 +1,9 @@
 {
   "name": "Riviera Race Spotter",
   "short_name": "Race Spotter",
-  "start_url": "./index.html#now",
+  "start_url": "./index.html#live",
   "display": "standalone",
-  "background_color": "#EEF4F5",
+  "background_color": "#EDF3F5",
   "theme_color": "#0B6A86",
   "icons": [
     {"src": "icon-192.png", "sizes": "192x192", "type": "image/png"},

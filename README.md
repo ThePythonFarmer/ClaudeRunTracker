@@ -1,29 +1,29 @@
 # Riviera Race Spotter
 
-A one-page iPhone web app for following a runner in the **Marathon des Alpes-Maritimes Nice–Cannes (Sunday 8 November 2026)** and working out which train to take to see them again.
+An iPhone web app for following a runner in the **Marathon des Alpes-Maritimes Nice–Cannes (Sunday 8 November 2026)** and catching them again by train.
 
-## What it does
+## Tabs
 
-- **Now**: estimates where your runner is, and lists the spots you can still reach before they do, with the walk/train/walk legs and the minutes you'll have spare.
-- **Plan**: a leapfrog itinerary that fits in the most sightings from where you are. It is recalculated whenever the projection changes.
-- **Course**: 15 viewing spots from the start on the Promenade des Anglais to the finish on La Croisette, each with its nearest TER station, walk time and an Apple Maps link. You can edit any km or walk time.
-- **Splits**: tap *I just saw them here*, or enter a chip split from the official live tracking. Projections then use their real pace (plus a slowdown % you set).
-- **Rehearse**: a slider lets you try the app at any race-day time before Sunday.
+- **Live**: one card answers *where do I go now?* It shows the next spot, when to leave, the walk/train/walk legs and **Navigate** buttons that open Google Maps. Below it: the runner's predicted km, pace and finish, and every spot you can still reach in time.
+- **Map**: the course routed along the seafront roads, with a predicted runner position, the stretch covered so far, km markers, 15 viewing spots and 11 TER stations. Tap a spot or station for timings and Google Maps directions. Use **Me** to show your GPS position.
+- **Plan**: the train-hopping itinerary that fits in the most sightings, ending with meeting them at the finish. It updates whenever predictions change.
+- **Runner**: name, target time, start time, positions from the official tracking, train assumptions, rehearsal mode, spot adjustments.
 
-Everything is stored on the phone (localStorage). Times are Paris time.
+Predictions start from the target time. Tap **I just saw them** at a spot, or add a split from the official tracking, and they switch to the runner's real pace. Everything is stored on the phone. Times are Paris time.
 
-## Install on iPhone
+## Where the numbers come from
 
-The app has to be served once over HTTPS. Then, in Safari, tap **Share → Add to Home Screen**. The service worker keeps it working without signal.
+- **Course line**: routed with OpenStreetMap (`tools/route_course.py`) through seafront waypoints in all seven towns, then calibrated (`tools/calibrate_course.py`) to the official fixed points: start 0, Fort Carré relay 21.1 km, finish 42.195 km. Output: `data/course.json`.
+- **Stations and landmarks**: geocoded with OpenStreetMap Nominatim.
+- **Walk times**: routed station → course on foot at 4.8 km/h.
+- **Train ride times**: estimates for stopping TERs. The default assumes a train every 20 min and that you've just missed one. Check SNCF Connect on the day.
 
-Easiest: enable **GitHub Pages** for this repo (Settings → Pages → Deploy from branch, root), then open `https://<user>.github.io/<repo>/` on the phone.
+## Install on iPhone (works offline)
+
+Enable GitHub Pages for this repo and branch (Settings → Pages → Deploy from a branch → `/ (root)`). Open the site in Safari, then **Share → Add to Home Screen**. Open the Map once on Wi-Fi so the tiles are cached.
 
 ## Build
 
-`src/app.html` is the source. `python3 build.py` regenerates `index.html`, `manifest.webmanifest`, `sw.js` and the icons.
+`src/app.html` is the source (also published as a claude.ai artifact). `python3 build.py` fills in the course data and Leaflet CSS, then writes `index.html`, `manifest.webmanifest`, `sw.js` and the icons.
 
-## Assumptions to check
-
-- Km positions are estimates, apart from the start, Fort Carré (21.1 km, relay changeover) and the finish (42.195). Compare them with the official course map on marathon06.com.
-- Train ride times are approximate for stopping TERs. The default assumes a train every 20 min and that you've just missed one. Check SNCF Connect on the day.
-- SNCF *Pass Marathon*: €8, unlimited travel Nice-Riquier ↔ Cannes on race day. Access to Cannes station is controlled after the race.
+Map data © OpenStreetMap contributors, tiles © CARTO. Leaflet (BSD-2).

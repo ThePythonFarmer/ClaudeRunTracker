@@ -16,428 +16,630 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>/*LEAFLET_CSS:BEGIN*/ .leaflet-pane, .leaflet-tile, .leaflet-marker-icon, .leaflet-marker-shadow, .leaflet-tile-container, .leaflet-pane > svg, .leaflet-pane > canvas, .leaflet-zoom-box, .leaflet-image-layer, .leaflet-layer { position: absolute; left: 0; top: 0; } .leaflet-container { overflow: hidden; } .leaflet-tile, .leaflet-marker-icon, .leaflet-marker-shadow { -webkit-user-select: none; -moz-user-select: none; user-select: none; -webkit-user-drag: none; } .leaflet-tile::selection { background: transparent; } .leaflet-safari .leaflet-tile { image-rendering: -webkit-optimize-contrast; } .leaflet-safari .leaflet-tile-container { width: 1600px; height: 1600px; -webkit-transform-origin: 0 0; } .leaflet-marker-icon, .leaflet-marker-shadow { display: block; } .leaflet-container .leaflet-overlay-pane svg { max-width: none !important; max-height: none !important; } .leaflet-container .leaflet-marker-pane img, .leaflet-container .leaflet-shadow-pane img, .leaflet-container .leaflet-tile-pane img, .leaflet-container img.leaflet-image-layer, .leaflet-container .leaflet-tile { max-width: none !important; max-height: none !important; width: auto; padding: 0; } .leaflet-container img.leaflet-tile { mix-blend-mode: plus-lighter; } .leaflet-container.leaflet-touch-zoom { -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; } .leaflet-container.leaflet-touch-drag { -ms-touch-action: pinch-zoom; touch-action: none; touch-action: pinch-zoom; } .leaflet-container.leaflet-touch-drag.leaflet-touch-zoom { -ms-touch-action: none; touch-action: none; } .leaflet-container { -webkit-tap-highlight-color: transparent; } .leaflet-container a { -webkit-tap-highlight-color: rgba(51, 181, 229, 0.4); } .leaflet-tile { filter: inherit; visibility: hidden; } .leaflet-tile-loaded { visibility: inherit; } .leaflet-zoom-box { width: 0; height: 0; -moz-box-sizing: border-box; box-sizing: border-box; z-index: 800; } .leaflet-overlay-pane svg { -moz-user-select: none; } .leaflet-pane { z-index: 400; } .leaflet-tile-pane { z-index: 200; } .leaflet-overlay-pane { z-index: 400; } .leaflet-shadow-pane { z-index: 500; } .leaflet-marker-pane { z-index: 600; } .leaflet-tooltip-pane { z-index: 650; } .leaflet-popup-pane { z-index: 700; } .leaflet-map-pane canvas { z-index: 100; } .leaflet-map-pane svg { z-index: 200; } .leaflet-vml-shape { width: 1px; height: 1px; } .lvml { behavior: url(#default#VML); display: inline-block; position: absolute; } .leaflet-control { position: relative; z-index: 800; pointer-events: visiblePainted; pointer-events: auto; } .leaflet-top, .leaflet-bottom { position: absolute; z-index: 1000; pointer-events: none; } .leaflet-top { top: 0; } .leaflet-right { right: 0; } .leaflet-bottom { bottom: 0; } .leaflet-left { left: 0; } .leaflet-control { float: left; clear: both; } .leaflet-right .leaflet-control { float: right; } .leaflet-top .leaflet-control { margin-top: 10px; } .leaflet-bottom .leaflet-control { margin-bottom: 10px; } .leaflet-left .leaflet-control { margin-left: 10px; } .leaflet-right .leaflet-control { margin-right: 10px; } .leaflet-fade-anim .leaflet-popup { opacity: 0; -webkit-transition: opacity 0.2s linear; -moz-transition: opacity 0.2s linear; transition: opacity 0.2s linear; } .leaflet-fade-anim .leaflet-map-pane .leaflet-popup { opacity: 1; } .leaflet-zoom-animated { -webkit-transform-origin: 0 0; -ms-transform-origin: 0 0; transform-origin: 0 0; } svg.leaflet-zoom-animated { will-change: transform; } .leaflet-zoom-anim .leaflet-zoom-animated { -webkit-transition: -webkit-transform 0.25s cubic-bezier(0,0,0.25,1); -moz-transition: -moz-transform 0.25s cubic-bezier(0,0,0.25,1); transition: transform 0.25s cubic-bezier(0,0,0.25,1); } .leaflet-zoom-anim .leaflet-tile, .leaflet-pan-anim .leaflet-tile { -webkit-transition: none; -moz-transition: none; transition: none; } .leaflet-zoom-anim .leaflet-zoom-hide { visibility: hidden; } .leaflet-interactive { cursor: pointer; } .leaflet-grab { cursor: -webkit-grab; cursor: -moz-grab; cursor: grab; } .leaflet-crosshair, .leaflet-crosshair .leaflet-interactive { cursor: crosshair; } .leaflet-popup-pane, .leaflet-control { cursor: auto; } .leaflet-dragging .leaflet-grab, .leaflet-dragging .leaflet-grab .leaflet-interactive, .leaflet-dragging .leaflet-marker-draggable { cursor: move; cursor: -webkit-grabbing; cursor: -moz-grabbing; cursor: grabbing; } .leaflet-marker-icon, .leaflet-marker-shadow, .leaflet-image-layer, .leaflet-pane > svg path, .leaflet-tile-container { pointer-events: none; } .leaflet-marker-icon.leaflet-interactive, .leaflet-image-layer.leaflet-interactive, .leaflet-pane > svg path.leaflet-interactive, svg.leaflet-image-layer.leaflet-interactive path { pointer-events: visiblePainted; pointer-events: auto; } .leaflet-container { background: #ddd; outline-offset: 1px; } .leaflet-container a { color: #0078A8; } .leaflet-zoom-box { border: 2px dotted #38f; background: rgba(255,255,255,0.5); } .leaflet-container { font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; font-size: 12px; font-size: 0.75rem; line-height: 1.5; } .leaflet-bar { box-shadow: 0 1px 5px rgba(0,0,0,0.65); border-radius: 4px; } .leaflet-bar a { background-color: #fff; border-bottom: 1px solid #ccc; width: 26px; height: 26px; line-height: 26px; display: block; text-align: center; text-decoration: none; color: black; } .leaflet-bar a, .leaflet-control-layers-toggle { background-position: 50% 50%; background-repeat: no-repeat; display: block; } .leaflet-bar a:hover, .leaflet-bar a:focus { background-color: #f4f4f4; } .leaflet-bar a:first-child { border-top-left-radius: 4px; border-top-right-radius: 4px; } .leaflet-bar a:last-child { border-bottom-left-radius: 4px; border-bottom-right-radius: 4px; border-bottom: none; } .leaflet-bar a.leaflet-disabled { cursor: default; background-color: #f4f4f4; color: #bbb; } .leaflet-touch .leaflet-bar a { width: 30px; height: 30px; line-height: 30px; } .leaflet-touch .leaflet-bar a:first-child { border-top-left-radius: 2px; border-top-right-radius: 2px; } .leaflet-touch .leaflet-bar a:last-child { border-bottom-left-radius: 2px; border-bottom-right-radius: 2px; } .leaflet-control-zoom-in, .leaflet-control-zoom-out { font: bold 18px 'Lucida Console', Monaco, monospace; text-indent: 1px; } .leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out { font-size: 22px; } .leaflet-control-layers { box-shadow: 0 1px 5px rgba(0,0,0,0.4); background: #fff; border-radius: 5px; } .leaflet-control-layers-toggle { background-image: url(images/layers.png); width: 36px; height: 36px; } .leaflet-retina .leaflet-control-layers-toggle { background-image: url(images/layers-2x.png); background-size: 26px 26px; } .leaflet-touch .leaflet-control-layers-toggle { width: 44px; height: 44px; } .leaflet-control-layers .leaflet-control-layers-list, .leaflet-control-layers-expanded .leaflet-control-layers-toggle { display: none; } .leaflet-control-layers-expanded .leaflet-control-layers-list { display: block; position: relative; } .leaflet-control-layers-expanded { padding: 6px 10px 6px 6px; color: #333; background: #fff; } .leaflet-control-layers-scrollbar { overflow-y: scroll; overflow-x: hidden; padding-right: 5px; } .leaflet-control-layers-selector { margin-top: 2px; position: relative; top: 1px; } .leaflet-control-layers label { display: block; font-size: 13px; font-size: 1.08333em; } .leaflet-control-layers-separator { height: 0; border-top: 1px solid #ddd; margin: 5px -10px 5px -6px; } .leaflet-default-icon-path { background-image: url(images/marker-icon.png); } .leaflet-container .leaflet-control-attribution { background: #fff; background: rgba(255, 255, 255, 0.8); margin: 0; } .leaflet-control-attribution, .leaflet-control-scale-line { padding: 0 5px; color: #333; line-height: 1.4; } .leaflet-control-attribution a { text-decoration: none; } .leaflet-control-attribution a:hover, .leaflet-control-attribution a:focus { text-decoration: underline; } .leaflet-attribution-flag { display: inline !important; vertical-align: baseline !important; width: 1em; height: 0.6669em; } .leaflet-left .leaflet-control-scale { margin-left: 5px; } .leaflet-bottom .leaflet-control-scale { margin-bottom: 5px; } .leaflet-control-scale-line { border: 2px solid #777; border-top: none; line-height: 1.1; padding: 2px 5px 1px; white-space: nowrap; -moz-box-sizing: border-box; box-sizing: border-box; background: rgba(255, 255, 255, 0.8); text-shadow: 1px 1px #fff; } .leaflet-control-scale-line:not(:first-child) { border-top: 2px solid #777; border-bottom: none; margin-top: -2px; } .leaflet-control-scale-line:not(:first-child):not(:last-child) { border-bottom: 2px solid #777; } .leaflet-touch .leaflet-control-attribution, .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar { box-shadow: none; } .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar { border: 2px solid rgba(0,0,0,0.2); background-clip: padding-box; } .leaflet-popup { position: absolute; text-align: center; margin-bottom: 20px; } .leaflet-popup-content-wrapper { padding: 1px; text-align: left; border-radius: 12px; } .leaflet-popup-content { margin: 13px 24px 13px 20px; line-height: 1.3; font-size: 13px; font-size: 1.08333em; min-height: 1px; } .leaflet-popup-content p { margin: 17px 0; margin: 1.3em 0; } .leaflet-popup-tip-container { width: 40px; height: 20px; position: absolute; left: 50%; margin-top: -1px; margin-left: -20px; overflow: hidden; pointer-events: none; } .leaflet-popup-tip { width: 17px; height: 17px; padding: 1px; margin: -10px auto 0; pointer-events: auto; -webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -ms-transform: rotate(45deg); transform: rotate(45deg); } .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: white; color: #333; box-shadow: 0 3px 14px rgba(0,0,0,0.4); } .leaflet-container a.leaflet-popup-close-button { position: absolute; top: 0; right: 0; border: none; text-align: center; width: 24px; height: 24px; font: 16px/24px Tahoma, Verdana, sans-serif; color: #757575; text-decoration: none; background: transparent; } .leaflet-container a.leaflet-popup-close-button:hover, .leaflet-container a.leaflet-popup-close-button:focus { color: #585858; } .leaflet-popup-scrolled { overflow: auto; } .leaflet-oldie .leaflet-popup-content-wrapper { -ms-zoom: 1; } .leaflet-oldie .leaflet-popup-tip { width: 24px; margin: 0 auto; -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)"; filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678); } .leaflet-oldie .leaflet-control-zoom, .leaflet-oldie .leaflet-control-layers, .leaflet-oldie .leaflet-popup-content-wrapper, .leaflet-oldie .leaflet-popup-tip { border: 1px solid #999; } .leaflet-div-icon { background: #fff; border: 1px solid #666; } .leaflet-tooltip { position: absolute; padding: 6px; background-color: #fff; border: 1px solid #fff; border-radius: 3px; color: #222; white-space: nowrap; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; pointer-events: none; box-shadow: 0 1px 3px rgba(0,0,0,0.4); } .leaflet-tooltip.leaflet-interactive { cursor: pointer; pointer-events: auto; } .leaflet-tooltip-top:before, .leaflet-tooltip-bottom:before, .leaflet-tooltip-left:before, .leaflet-tooltip-right:before { position: absolute; pointer-events: none; border: 6px solid transparent; background: transparent; content: ""; } .leaflet-tooltip-bottom { margin-top: 6px; } .leaflet-tooltip-top { margin-top: -6px; } .leaflet-tooltip-bottom:before, .leaflet-tooltip-top:before { left: 50%; margin-left: -6px; } .leaflet-tooltip-top:before { bottom: 0; margin-bottom: -12px; border-top-color: #fff; } .leaflet-tooltip-bottom:before { top: 0; margin-top: -12px; margin-left: -6px; border-bottom-color: #fff; } .leaflet-tooltip-left { margin-left: -6px; } .leaflet-tooltip-right { margin-left: 6px; } .leaflet-tooltip-left:before, .leaflet-tooltip-right:before { top: 50%; margin-top: -6px; } .leaflet-tooltip-left:before { right: 0; margin-right: -12px; border-left-color: #fff; } .leaflet-tooltip-right:before { left: 0; margin-left: -12px; border-right-color: #fff; } @media print { .leaflet-control { -webkit-print-color-adjust: exact; print-color-adjust: exact; } } /*LEAFLET_CSS:END*/</style>
 <style>
-/* Layout: one narrow column, a sticky race-clock bar, the course as a vertical coast ribbon (km markers like roadside posts), tabs at the bottom. */
+/* Layout: one thumb-width column. Sticky race clock on top, tab bar at the bottom, one bold "next move" card that answers "where do I go now?", the course as a real map. */
 :root{
-  --bg:#EEF4F5; --surface:#FFFFFF; --ink:#0F2430; --muted:#566C77; --line:#D3DFE3;
-  --sea:#0B6A86; --sea-soft:#DCEEF3; --sun:#E39A12; --sun-ink:#3A2500;
-  --good:#1D8350; --warn:#A86A12; --bad:#BC3A33;
+  --bg:#EDF3F5; --surface:#FFFFFF; --ink:#0F2430; --muted:#55707C; --line:#D2DEE3;
+  --sea:#0B6A86; --sea-deep:#084E63; --sea-soft:#DCEDF2; --on-sea:#F3FAFC;
+  --sun:#E8A015; --sun-ink:#2F1E00; --good:#1B7F4C; --warn:#A5650C; --bad:#B9362F;
+  --map-bg:#CFE3EA;
   --f-display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
   --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
-  --r:10px;
+  --r:14px; --tabs-h:62px;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#09161D; --surface:#11222B; --ink:#E4EDF0; --muted:#8EA3AD; --line:#243A47; --sea:#4DB2D0; --sea-soft:#14323E; --sun:#F2B642; --sun-ink:#2B1B00;
-  --good:#4CC488; --warn:#E3A945; --bad:#EE6B62; color-scheme:dark}}
+  --bg:#08151B; --surface:#10212A; --ink:#E4EDF0; --muted:#8FA5AF; --line:#243B48; --sea:#4DB2D0; --sea-deep:#0E3F50; --sea-soft:#13313D; --on-sea:#EAF6FA;
+  --sun:#F2B43F; --sun-ink:#2A1A00; --good:#4CC488; --warn:#E3A945; --bad:#EE6B62; --map-bg:#0D2630; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#09161D; --surface:#11222B; --ink:#E4EDF0; --muted:#8EA3AD;
-  --line:#243A47; --sea:#4DB2D0; --sea-soft:#14323E; --sun:#F2B642; --sun-ink:#2B1B00;
-  --good:#4CC488; --warn:#E3A945; --bad:#EE6B62; color-scheme:dark}
+  --bg:#08151B; --surface:#10212A; --ink:#E4EDF0; --muted:#8FA5AF;
+  --line:#243B48; --sea:#4DB2D0; --sea-deep:#0E3F50; --sea-soft:#13313D; --on-sea:#EAF6FA;
+  --sun:#F2B43F; --sun-ink:#2A1A00; --good:#4CC488; --warn:#E3A945; --bad:#EE6B62; --map-bg:#0D2630; color-scheme:dark}
 *{box-sizing:border-box}
 html,body{background:var(--bg)}
-body{color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.45;
+body{color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.45;-webkit-text-size-adjust:100%;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
-  padding-block:0 96px;max-width:640px;margin:0 auto}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
-h1,h2,h3{font-family:var(--f-display);font-weight:700;letter-spacing:.01em;text-wrap:balance;margin:0}
-h2{font-size:1.5rem}
-h3{font-size:1.15rem}
-.mono,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
-.muted{color:var(--muted)}
-.small{font-size:.85rem}
+  padding-block:0 calc(var(--tabs-h) + 28px + env(safe-area-inset-bottom,0px));max-width:640px;margin:0 auto}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:1000;background:var(--bg)}
+h1,h2,h3{font-family:var(--f-display);font-weight:700;letter-spacing:.01em;text-wrap:balance;margin:0;line-height:1.05}
+h2{font-size:1.6rem} h3{font-size:1.2rem}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)} .small{font-size:.86rem}
 a{color:var(--sea)}
 button,input,select{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--sea);outline-offset:2px}
+.eyebrow{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.1em;font-size:.82rem;color:var(--muted);font-weight:700}
 
 /* header */
-.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:12px 10px;border-bottom:1px solid var(--line);display:grid;gap:8px}
-.top-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.brand{font-family:var(--f-display);font-size:1.05rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
-.clock{font-family:var(--f-mono);font-size:1.6rem;line-height:1}
-.sim{display:flex;align-items:center;gap:10px;background:var(--sea-soft);border-radius:var(--r);padding:6px 10px;font-size:.85rem}
-.sim input[type=range]{flex:1;min-width:0;accent-color:var(--sea)}
-.sim label{white-space:nowrap}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:900;background:var(--bg);padding-block:10px 8px;display:grid;gap:8px}
+.top-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-family:var(--f-display);font-size:1.1rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+.brand span{color:var(--sea)}
+.clock{font-family:var(--f-mono);font-size:1.25rem}
+.rehearse{display:flex;align-items:center;gap:10px;background:var(--sun);color:var(--sun-ink);border-radius:999px;padding:4px 6px 4px 14px;font-size:.85rem;font-weight:700}
+.rehearse input{flex:1;min-width:0;accent-color:var(--sea-deep)}
+.rehearse button{border:0;background:var(--sun-ink);color:var(--sun);border-radius:999px;padding:6px 12px;font-weight:700;font-size:.8rem;cursor:pointer}
 
-/* panels */
-main{display:grid;gap:16px;padding-top:16px}
+main{display:grid;gap:14px;padding-top:4px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:grid;gap:12px;min-width:0}
-.eyebrow{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.1em;font-size:.85rem;color:var(--muted)}
 
-/* runner hero */
-.runner-km{font-family:var(--f-display);font-size:3.4rem;line-height:.9;font-weight:700}
-.runner-km small{font-size:1.2rem;color:var(--muted);font-weight:600}
-.statline{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.92rem}
-.statline b{font-family:var(--f-mono);font-weight:500}
-.bar{position:relative;height:34px;margin-top:4px}
-.bar .track{position:absolute;left:0;right:0;top:15px;height:4px;border-radius:2px;background:var(--line)}
-.bar .done{position:absolute;left:0;top:15px;height:4px;border-radius:2px;background:var(--sea)}
-.bar .tick{position:absolute;top:10px;width:2px;height:14px;background:var(--muted);opacity:.5}
-.bar .dot{position:absolute;top:6px;width:22px;height:22px;margin-left:-11px;border-radius:50%;background:var(--sun);border:3px solid var(--surface);box-shadow:0 0 0 1px var(--sun)}
-.bar-labels{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted)}
+/* runner strip */
+.runner{display:grid;gap:10px}
+.runner-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.big{font-family:var(--f-display);font-size:2.9rem;line-height:.9;font-weight:700}
+.big small{font-size:1.1rem;color:var(--muted);font-weight:600;margin-left:6px}
+.bar{position:relative;height:26px}
+.bar .track,.bar .done{position:absolute;left:0;top:11px;height:5px;border-radius:3px}
+.bar .track{right:0;background:var(--line)} .bar .done{background:var(--sea)}
+.bar .tick{position:absolute;top:7px;width:2px;height:13px;background:var(--muted);opacity:.45}
+.bar .dot{position:absolute;top:3px;width:21px;height:21px;margin-left:-10px;border-radius:50%;background:var(--sun);border:3px solid var(--surface);box-shadow:0 0 0 1.5px var(--sun)}
+.bar-labels{display:flex;justify-content:space-between;font-size:.74rem;color:var(--muted);margin-top:-4px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.stat{display:grid;gap:0}
+.stat b{font-family:var(--f-mono);font-weight:500;font-size:1.02rem}
+.stat span{font-size:.76rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.source{font-size:.82rem;color:var(--muted)}
+
+/* next move hero */
+.hero{background:var(--sea-deep);color:var(--on-sea);border-radius:var(--r);padding:18px;display:grid;gap:12px}
+.hero .eyebrow{color:var(--on-sea);opacity:.75}
+.hero h2{font-size:2rem}
+.hero .when{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.hero .when .t{font-family:var(--f-mono);font-size:1.5rem}
+.count{background:var(--sun);color:var(--sun-ink);border-radius:999px;padding:3px 12px;font-weight:700;font-size:.92rem;white-space:nowrap}
+.legs{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:.95rem}
+.legs li{display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:start}
+.legs .ic{width:22px;height:22px;border-radius:6px;display:grid;place-items:center;background:rgba(255,255,255,.14);font-size:.72rem;font-weight:700;font-family:var(--f-display)}
+.hero .then{border-top:1px solid rgba(255,255,255,.18);padding-top:10px;font-size:.92rem;opacity:.9}
 
 .btns{display:flex;flex-wrap:wrap;gap:8px}
-.btn{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:10px 16px;font-weight:700;cursor:pointer;min-height:44px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:10px 16px;font-weight:700;cursor:pointer;min-height:46px;text-decoration:none;color:var(--ink);font-size:.95rem}
 .btn.primary{background:var(--sea);border-color:var(--sea);color:var(--surface)}
 .btn.sun{background:var(--sun);border-color:var(--sun);color:var(--sun-ink)}
-.btn.ghost{background:transparent}
+.btn.onsea{background:var(--on-sea);border-color:var(--on-sea);color:var(--sea-deep)}
+.btn.onsea-ghost{background:transparent;border-color:rgba(255,255,255,.4);color:var(--on-sea)}
+.btn.block{flex:1 1 140px}
 .btn:active{transform:translateY(1px)}
+.btn svg{width:18px;height:18px;flex:none}
 
-.field{display:grid;gap:4px;min-width:0}
-.field label{font-size:.85rem;color:var(--muted);font-weight:700}
-.field input,.field select{border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:10px 12px;min-height:44px;width:100%}
-.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
-.check{display:flex;gap:10px;align-items:center}
-.check input{width:22px;height:22px;accent-color:var(--sea)}
+/* location pill */
+.where{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.where b{display:block}
+.chip{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:8px 14px;font-weight:700;cursor:pointer;min-height:40px;white-space:nowrap}
 
-/* options list */
-.opts{display:grid;gap:8px;margin:0;padding:0;list-style:none}
-.opt{display:grid;grid-template-columns:auto 1fr auto;gap:4px 12px;align-items:start;padding:12px;border-radius:var(--r);border:1px solid var(--line);background:var(--bg)}
-.opt.miss{opacity:.55}
-.opt .km{font-family:var(--f-mono);font-size:.85rem;color:var(--muted);padding-top:2px;min-width:3.6em}
+/* options */
+.opts{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.opt{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:2px 10px;align-items:center;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--bg);cursor:pointer;text-align:left;width:100%}
+.opt .k{font-family:var(--f-mono);font-size:.82rem;color:var(--muted)}
 .opt .nm{font-weight:700;min-width:0}
-.opt .how{grid-column:2 / 4;font-size:.88rem;color:var(--muted)}
-.pill{font-family:var(--f-display);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:.85rem;border-radius:999px;padding:3px 10px;white-space:nowrap;border:1.5px solid currentColor}
+.opt .sub{grid-column:2 / 4;font-size:.84rem;color:var(--muted)}
+.pill{font-family:var(--f-display);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:.82rem;border-radius:999px;padding:2px 10px;white-space:nowrap;border:1.5px solid currentColor}
 .pill.good{color:var(--good)} .pill.warn{color:var(--warn)} .pill.bad{color:var(--bad)}
-.waiting{background:var(--sun);color:var(--sun-ink);border-radius:var(--r);padding:12px 14px;font-weight:700}
 
-/* plan steps */
-.steps{list-style:none;margin:0;padding:0;display:grid;gap:0}
-.step{display:grid;grid-template-columns:28px 1fr;gap:12px;position:relative;padding-bottom:16px}
-.step:not(:last-child)::before{content:"";position:absolute;left:13px;top:28px;bottom:0;width:2px;background:var(--line)}
-.step .n{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-display);font-weight:700;background:var(--sun);color:var(--sun-ink)}
-.step.go .n{background:var(--sea-soft);color:var(--sea);font-size:.9rem}
+/* plan */
+.steps{list-style:none;margin:0;padding:0;display:grid}
+.step{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;position:relative;padding-bottom:18px}
+.step:not(:last-child)::before{content:"";position:absolute;left:14px;top:30px;bottom:0;width:2px;background:var(--line)}
+.step .n{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-display);font-weight:700;background:var(--sun);color:var(--sun-ink);position:relative;z-index:1}
+.step.go .n{background:var(--sea-soft);color:var(--sea);font-size:.75rem}
 .step .t{font-family:var(--f-mono);font-size:.9rem}
+.step .body{display:grid;gap:6px;min-width:0}
+.step .btns .btn{min-height:40px;padding:8px 14px;font-size:.88rem}
 
-/* course ribbon */
-.ribbon{list-style:none;margin:0;padding:0;position:relative}
-.ribbon::before{content:"";position:absolute;left:44px;top:8px;bottom:8px;width:4px;border-radius:2px;background:var(--sea-soft)}
-.rib{display:grid;grid-template-columns:36px 20px 1fr;gap:8px;align-items:start;padding:8px 0;position:relative}
-.rib .k{font-family:var(--f-mono);font-size:.82rem;color:var(--muted);text-align:right;padding-top:2px}
-.rib .pin{width:14px;height:14px;margin:4px 0 0 1px;border-radius:50%;background:var(--surface);border:3px solid var(--sea);position:relative;z-index:1}
-.rib.passed .pin{background:var(--sea)}
-.rib .body{display:grid;gap:2px;min-width:0}
-.rib .meta{font-size:.85rem;color:var(--muted)}
-.rib.runner .pin{width:20px;height:20px;margin:1px 0 0 -2px;background:var(--sun);border-color:var(--surface);box-shadow:0 0 0 1px var(--sun)}
-.rib.runner .body{font-weight:700;color:var(--ink)}
-.kmedit{width:5.2em;border:1px solid var(--line);border-radius:6px;background:var(--bg);padding:4px 6px;font-family:var(--f-mono);font-size:.85rem}
+/* map */
+.mapbox{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:var(--map-bg)}
+#map{height:min(64vh,560px);min-height:340px;width:100%;background:var(--map-bg)}
+.map-ctrl{position:absolute;right:10px;top:10px;z-index:500;display:grid;gap:8px}
+.map-ctrl button{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;min-width:56px;min-height:40px;padding:0 8px;font-weight:700;font-size:.8rem;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.map-note{position:absolute;left:10px;bottom:10px;right:64px;z-index:500;background:var(--surface);border-radius:10px;padding:6px 10px;font-size:.78rem;color:var(--muted);box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.8rem;color:var(--muted);align-items:center}
+.legend i{display:inline-block;vertical-align:-2px;margin-right:5px}
+.lg-run{width:14px;height:14px;border-radius:50%;background:var(--sun);border:2px solid var(--surface);box-shadow:0 0 0 1px var(--sun)}
+.lg-spot{width:16px;height:16px;border-radius:50%;background:var(--sea);}
+.lg-st{width:13px;height:13px;border-radius:3px;background:var(--ink)}
+.lg-line{width:22px;height:4px;border-radius:2px;background:var(--sea)}
+.m-spot{width:28px;height:28px;border-radius:50%;background:var(--sea);color:var(--surface);border:2.5px solid var(--surface);display:grid;place-items:center;font:700 13px/1 var(--f-display);box-shadow:0 1px 4px rgba(0,0,0,.35)}
+.m-spot.passed{background:var(--muted)}
+.m-spot.sel{background:var(--sun);color:var(--sun-ink);transform:scale(1.2)}
+.m-st{width:18px;height:18px;border-radius:4px;background:var(--ink);color:var(--surface);display:grid;place-items:center;border:2px solid var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.m-st svg{width:11px;height:11px}
+.m-km{font:700 11px/1 var(--f-mono);color:var(--sea-deep);background:var(--surface);border:1.5px solid var(--sea);border-radius:6px;padding:2px 4px;white-space:nowrap;text-align:center}
+.m-run{position:relative;width:26px;height:26px}
+.m-run .d{position:absolute;inset:0;border-radius:50%;background:var(--sun);border:3px solid #fff;box-shadow:0 0 0 2px var(--sun),0 2px 6px rgba(0,0,0,.4)}
+.m-run .lbl{position:absolute;left:32px;top:2px;background:var(--sun);color:var(--sun-ink);font:700 12px/1.2 var(--f-body);padding:2px 8px;border-radius:999px;white-space:nowrap}
+.z-low .m-st,.z-low .m-km{display:none}
+.z-low .m-spot{width:22px;height:22px;font-size:11px;border-width:2px}
+.m-me{width:18px;height:18px;border-radius:50%;background:#2F7BF6;border:3px solid #fff;box-shadow:0 0 0 6px rgba(47,123,246,.25)}
+@media (prefers-reduced-motion:no-preference){
+  .m-run .d{animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 2px var(--sun),0 0 0 0 rgba(232,160,21,.55)}70%{box-shadow:0 0 0 2px var(--sun),0 0 0 14px rgba(232,160,21,0)}100%{box-shadow:0 0 0 2px var(--sun),0 0 0 0 rgba(232,160,21,0)}}
+  .bar .dot,.bar .done{transition:left .6s ease,width .6s ease}}
+.leaflet-container{font-family:var(--f-body)}
 
-.splits{list-style:none;margin:0;padding:0;display:grid;gap:6px}
-.splits li{display:flex;justify-content:space-between;align-items:center;gap:8px;border-bottom:1px solid var(--line);padding-bottom:6px}
-.x{border:0;background:none;color:var(--bad);font-weight:700;cursor:pointer;min-height:36px;padding:0 8px}
+/* forms */
+.field{display:grid;gap:4px;min-width:0}
+.field label,.lbl{font-size:.84rem;color:var(--muted);font-weight:700}
+.field input,.field select{border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:10px 12px;min-height:46px;width:100%}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.check{display:flex;gap:10px;align-items:center;font-weight:700}
+.check input{width:24px;height:24px;accent-color:var(--sea);flex:none}
+.seg{display:grid;grid-template-columns:1fr 1fr;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:3px;gap:3px}
+.seg button{border:0;background:transparent;border-radius:9px;min-height:40px;font-weight:700;cursor:pointer;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.kms{display:flex;flex-wrap:wrap;gap:6px}
+.kms button{border:1px solid var(--line);background:var(--bg);border-radius:999px;min-height:38px;min-width:48px;padding:0 10px;font-family:var(--f-mono);cursor:pointer}
+.kms button[aria-pressed="true"]{background:var(--sea);border-color:var(--sea);color:var(--surface)}
+.splits{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.splits li{display:grid;grid-template-columns:64px 1fr auto;gap:8px;align-items:center;border-bottom:1px solid var(--line);padding:6px 0}
+.x{border:0;background:none;color:var(--bad);font-weight:700;cursor:pointer;min-height:40px;padding:0 6px}
+details.card>summary{cursor:pointer;font-family:var(--f-display);font-weight:700;font-size:1.2rem;list-style:none}
+details.card>summary::-webkit-details-marker{display:none}
+details.card>summary::after{content:"+";float:right;color:var(--muted)}
+details.card[open]>summary::after{content:"–"}
+.adj{width:100%;border-collapse:collapse;font-size:.88rem}
+.adj td{padding:4px 4px;border-bottom:1px solid var(--line)}
+.adj input{width:4.6em;border:1px solid var(--line);border-radius:6px;background:var(--bg);padding:5px 6px;font-family:var(--f-mono);font-size:.85rem}
+.info dt{font-weight:700} .info dd{margin:0 0 10px;color:var(--muted)}
+.empty{color:var(--muted);font-size:.95rem}
 
-.note{border-left:3px solid var(--sea);padding:2px 0 2px 12px;font-size:.92rem}
-.info dt{font-weight:700}
-.info dd{margin:0 0 10px;color:var(--muted)}
+/* sheet (dialog) */
+dialog.sheet{border:0;padding:0;margin:auto auto 0;width:100%;max-width:640px;max-height:86vh;border-radius:18px 18px 0 0;background:var(--surface);color:var(--ink)}
+dialog.sheet::backdrop{background:rgba(5,20,28,.45)}
+.sheet-in{padding:18px max(16px,env(safe-area-inset-right,0px)) calc(18px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));display:grid;gap:12px}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.close{border:0;background:var(--bg);border-radius:999px;min-width:44px;min-height:44px;font-weight:700;cursor:pointer}
+.picklist{list-style:none;margin:0;padding:0;display:grid;gap:4px;max-height:52vh;overflow:auto}
+.picklist button{width:100%;text-align:left;border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:10px 12px;cursor:pointer;display:flex;justify-content:space-between;gap:8px;min-height:46px}
+.picklist button[aria-current="true"]{border-color:var(--sea);box-shadow:inset 0 0 0 1px var(--sea)}
+.picklist .k{font-family:var(--f-mono);color:var(--muted);font-size:.85rem;white-space:nowrap}
+.group{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.1em;font-size:.8rem;color:var(--muted);padding:8px 2px 2px}
 
-/* tabs */
-nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--surface);border-top:1px solid var(--line);
-  display:flex;justify-content:center;
-  padding-bottom:env(safe-area-inset-bottom,0px);padding-left:max(8px,env(safe-area-inset-left,0px));padding-right:max(8px,env(safe-area-inset-right,0px))}
-nav.tabs a{flex:1;max-width:160px;text-align:center;padding:12px 4px 10px;font-family:var(--f-display);font-weight:700;text-transform:uppercase;letter-spacing:.08em;text-decoration:none;color:var(--muted);border-top:3px solid transparent}
-nav.tabs a[aria-current="page"]{color:var(--sea);border-top-color:var(--sea)}
-@media (prefers-reduced-motion:no-preference){.bar .dot,.bar .done{transition:left .6s ease,width .6s ease}}
+/* toast + tabs */
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--tabs-h) + 14px + env(safe-area-inset-bottom,0px));z-index:1200;background:var(--ink);color:var(--bg);border-radius:12px;padding:10px 16px;font-weight:700;font-size:.92rem;max-width:min(92vw,520px);box-shadow:0 4px 16px rgba(0,0,0,.25)}
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:1100;background:var(--surface);border-top:1px solid var(--line);display:flex;justify-content:center;
+  padding-bottom:env(safe-area-inset-bottom,0px);padding-left:max(6px,env(safe-area-inset-left,0px));padding-right:max(6px,env(safe-area-inset-right,0px))}
+nav.tabs a{flex:1;max-width:150px;height:var(--tabs-h);display:grid;place-items:center;align-content:center;gap:3px;font-family:var(--f-display);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:.82rem;text-decoration:none;color:var(--muted)}
+nav.tabs a svg{width:22px;height:22px}
+nav.tabs a[aria-current="page"]{color:var(--sea)}
 </style>
 
 </head>
 <body>
 <header class="top">
   <div class="top-row">
-    <span class="brand">Nice → Cannes · 8 Nov</span>
+    <span class="brand">Nice <span>→</span> Cannes</span>
     <span class="clock" id="clock">--:--</span>
   </div>
-  <div class="sim" id="simbar">
-    <label class="check"><input type="checkbox" id="simOn"> Rehearse</label>
-    <input type="range" id="simT" min="0" max="440" step="5" aria-label="Rehearsal time">
-    <span class="mono" id="simLbl"></span>
+  <div class="rehearse" id="rehearse" hidden>
+    <span id="rhLbl">Rehearsal</span>
+    <input type="range" id="simT" min="0" max="420" step="1" aria-label="Rehearsal time">
+    <button id="rhOff" type="button">Go live</button>
   </div>
 </header>
 
 <main id="view"></main>
 
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<dialog class="sheet" id="sheet"><div class="sheet-in" id="sheetIn"></div></dialog>
+
 <nav class="tabs" aria-label="Sections">
-  <a href="#now" data-v="now">Now</a>
-  <a href="#plan" data-v="plan">Plan</a>
-  <a href="#course" data-v="course">Course</a>
-  <a href="#setup" data-v="setup">Setup</a>
+  <a href="#live" data-v="live"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="8"/></svg>Live</a>
+  <a href="#map" data-v="map"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg>Map</a>
+  <a href="#plan" data-v="plan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="5" r="2"/><circle cx="18" cy="12" r="2"/><circle cx="6" cy="19" r="2"/><path d="M8 5h4a4 4 0 0 1 0 8H8a3 3 0 0 0 0 6"/></svg>Plan</a>
+  <a href="#runner" data-v="runner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="4" r="2"/><path d="m6 21 4-6 3 2v5M9 10l3-3 3 3 3 1M12 7l-2 6"/></svg>Runner</a>
 </nav>
 
+<script src="vendor/leaflet.js"></script>
 <script>
 (function(){
 "use strict";
-const TZ='Europe/Paris', RACE_DATE='2026-11-08', OFFSET='+01:00', FULL=42.195;
+const TZ='Europe/Paris', RACE_DATE='2026-11-08', OFFSET='+01:00', FULL=42.195, MIN=60000;
 
-/* Train stations on the Nice–Cannes line, in race direction. ride = approx. minutes from Nice Ville on a stopping TER. */
+/* Course line [lat, lon, km], routed along the seafront roads with OpenStreetMap and calibrated to start 0, Fort Carré 21.1, finish 42.195. */
+const COURSE=/*COURSE:BEGIN*/[[43.69539,7.26738,0.0],[43.69515,7.26736,0.029],[43.69481,7.26112,0.565],[43.69441,7.25844,0.797],[43.6929,7.25169,1.399],[43.6909,7.24591,1.941],[43.69067,7.24605,1.97],[43.68959,7.24332,2.234],[43.68984,7.24318,2.27],[43.68781,7.23944,2.669],[43.68682,7.23787,2.847],[43.68586,7.23671,2.998],[43.6814,7.2318,3.667],[43.68149,7.2315,3.696],[43.68023,7.23035,3.874],[43.68033,7.23007,3.901],[43.67989,7.22967,3.966],[43.67883,7.22805,4.152],[43.67631,7.22504,4.541],[43.67533,7.22713,4.752],[43.67424,7.22649,4.891],[43.6741,7.22676,4.919],[43.67349,7.22646,5.003],[43.67241,7.22555,5.162],[43.67166,7.22464,5.28],[43.67132,7.22489,5.333],[43.6683,7.22073,5.832],[43.66767,7.21965,5.949],[43.66709,7.21812,6.095],[43.66671,7.2164,6.248],[43.66624,7.21114,6.711],[43.66545,7.20444,7.285],[43.66472,7.20139,7.561],[43.66317,7.19733,7.95],[43.66099,7.19363,8.366],[43.6603,7.19294,8.465],[43.66033,7.1928,8.478],[43.65982,7.19304,8.542],[43.65803,7.19279,8.754],[43.65802,7.19266,8.765],[43.65794,7.19297,8.796],[43.65802,7.19266,8.828],[43.65772,7.18632,9.367],[43.65718,7.18545,9.472],[43.65679,7.18262,9.717],[43.65645,7.18278,9.76],[43.65679,7.18262,9.803],[43.65623,7.18029,10.011],[43.65638,7.18018,10.031],[43.65645,7.17988,10.059],[43.65657,7.17986,10.077],[43.65633,7.17681,10.337],[43.65649,7.17451,10.534],[43.6564,7.17434,10.554],[43.65644,7.17367,10.611],[43.6567,7.17234,10.741],[43.65751,7.17087,10.906],[43.65761,7.16836,11.119],[43.65743,7.167,11.236],[43.65717,7.16598,11.327],[43.65499,7.15992,11.9],[43.65506,7.15987,11.909],[43.65499,7.15992,11.926],[43.65403,7.15756,12.155],[43.65313,7.15584,12.335],[43.64915,7.15042,12.988],[43.64751,7.14865,13.233],[43.6443,7.1456,13.688],[43.64113,7.14194,14.172],[43.639,7.138,14.589],[43.63813,7.13603,14.786],[43.63773,7.13545,14.853],[43.63681,7.13496,14.969],[43.6337,7.13519,15.334],[43.63204,7.13513,15.529],[43.63079,7.13496,15.675],[43.62896,7.13432,15.9],[43.62896,7.13442,15.909],[43.62897,7.13423,15.925],[43.6299,7.1345,16.045],[43.63007,7.13406,16.093],[43.62819,7.133,16.349],[43.62516,7.13164,16.727],[43.62498,7.1314,16.76],[43.62177,7.13006,17.153],[43.61817,7.12883,17.587],[43.61785,7.12859,17.635],[43.61496,7.12771,17.99],[43.615,7.1275,18.008],[43.61496,7.12771,18.027],[43.61473,7.12765,18.053],[43.61338,7.12703,18.22],[43.61272,7.12656,18.307],[43.61265,7.12675,18.325],[43.61235,7.12664,18.362],[43.61215,7.12648,18.389],[43.61217,7.12627,18.407],[43.6114,7.12602,18.5],[43.61131,7.12612,18.516],[43.61143,7.12629,18.537],[43.61137,7.12695,18.597],[43.61116,7.12703,18.622],[43.61072,7.12661,18.686],[43.60972,7.1262,18.808],[43.60715,7.12566,19.113],[43.60392,7.12558,19.49],[43.60366,7.12568,19.523],[43.60325,7.12555,19.573],[43.59293,7.1253,20.781],[43.59113,7.12443,21.004],[43.58985,7.12438,21.16],[43.58935,7.12378,21.238],[43.58899,7.12374,21.28],[43.58885,7.12276,21.365],[43.58858,7.12218,21.43],[43.58758,7.1213,21.569],[43.58646,7.12095,21.704],[43.58621,7.12124,21.744],[43.58632,7.1215,21.769],[43.58596,7.12156,21.811],[43.5848,7.12253,21.978],[43.58447,7.12491,22.189],[43.58573,7.12511,22.338],[43.58603,7.12549,22.388],[43.58567,7.12527,22.436],[43.58419,7.12506,22.611],[43.58413,7.12575,22.67],[43.58387,7.12566,22.701],[43.58371,7.12702,22.818],[43.58313,7.12795,22.928],[43.58252,7.12798,23.001],[43.58222,7.12888,23.087],[43.58104,7.12883,23.228],[43.58022,7.12813,23.342],[43.5796,7.12783,23.42],[43.57958,7.12742,23.458],[43.57872,7.12669,23.577],[43.57776,7.12629,23.699],[43.57762,7.12602,23.728],[43.57703,7.12584,23.799],[43.57668,7.12593,23.841],[43.57608,7.12491,23.954],[43.57615,7.12469,23.977],[43.5756,7.12427,24.051],[43.57494,7.12409,24.131],[43.57487,7.12446,24.164],[43.57468,7.12463,24.191],[43.57328,7.1253,24.374],[43.57221,7.12732,24.589],[43.57176,7.12772,24.651],[43.57158,7.12755,24.678],[43.57121,7.12777,24.733],[43.56957,7.12954,24.978],[43.56895,7.13102,25.124],[43.56903,7.13172,25.187],[43.56883,7.13245,25.253],[43.56884,7.13287,25.292],[43.56799,7.13302,25.393],[43.56807,7.13341,25.428],[43.56648,7.13483,25.65],[43.56466,7.13577,25.878],[43.56255,7.13643,26.133],[43.56235,7.13722,26.204],[43.56104,7.13721,26.358],[43.56063,7.13673,26.422],[43.55805,7.13483,26.765],[43.55664,7.13483,26.931],[43.55614,7.13449,27.001],[43.55412,7.13244,27.304],[43.55325,7.13036,27.509],[43.55296,7.12922,27.613],[43.55268,7.12894,27.654],[43.55194,7.12879,27.742],[43.55156,7.12838,27.799],[43.54957,7.12354,28.273],[43.54891,7.12267,28.381],[43.54883,7.1216,28.474],[43.54915,7.12045,28.578],[43.5488,7.12201,28.718],[43.54891,7.12267,28.775],[43.54929,7.12318,28.838],[43.54961,7.12282,28.887],[43.54949,7.12216,28.948],[43.55042,7.122,29.06],[43.55128,7.12117,29.186],[43.55195,7.12137,29.266],[43.55219,7.12197,29.325],[43.55255,7.12228,29.376],[43.5534,7.12214,29.477],[43.55405,7.12253,29.56],[43.55472,7.12232,29.641],[43.55526,7.12134,29.747],[43.55544,7.12125,29.77],[43.55602,7.12134,29.839],[43.55734,7.12215,30.01],[43.55826,7.12184,30.121],[43.55942,7.12181,30.259],[43.55987,7.12154,30.316],[43.56035,7.12082,30.399],[43.56115,7.11951,30.544],[43.56108,7.11936,30.561],[43.56143,7.11874,30.632],[43.56141,7.11847,30.659],[43.56165,7.11821,30.699],[43.56227,7.11775,30.786],[43.5631,7.11756,30.887],[43.56393,7.11627,31.035],[43.56447,7.11587,31.108],[43.56488,7.11571,31.158],[43.56627,7.11579,31.333],[43.56771,7.11311,31.618],[43.5675,7.11289,31.649],[43.56753,7.11211,31.717],[43.56825,7.11056,31.879],[43.56891,7.1087,32.055],[43.56891,7.10837,32.086],[43.57034,7.1048,32.454],[43.57121,7.10014,32.865],[43.57123,7.09743,33.095],[43.57017,7.08689,33.999],[43.5698,7.08457,34.202],[43.56928,7.08316,34.336],[43.56895,7.08303,34.377],[43.56877,7.08317,34.402],[43.56646,7.07836,34.894],[43.56656,7.07782,34.947],[43.56651,7.0773,34.992],[43.56664,7.07716,35.012],[43.56636,7.07539,35.184],[43.5656,7.0737,35.355],[43.56547,7.07371,35.375],[43.56518,7.07309,35.437],[43.56519,7.07268,35.481],[43.56374,7.06961,35.798],[43.56298,7.06844,35.932],[43.56192,7.06733,36.088],[43.5618,7.06687,36.131],[43.56047,7.06548,36.327],[43.55737,7.06257,36.768],[43.55481,7.06076,37.105],[43.55458,7.06032,37.159],[43.55302,7.05862,37.401],[43.5494,7.05581,37.891],[43.54867,7.05501,38.0],[43.54791,7.05365,38.147],[43.54744,7.05192,38.305],[43.54733,7.0503,38.442],[43.54749,7.04824,38.624],[43.54733,7.04657,38.773],[43.54701,7.04628,38.822],[43.54628,7.04631,38.909],[43.54505,7.04294,39.23],[43.54432,7.04322,39.318],[43.5437,7.04091,39.528],[43.54285,7.04103,39.634],[43.54151,7.03989,39.82],[43.54153,7.03842,39.945],[43.53937,7.03811,40.201],[43.53964,7.03589,40.392],[43.53955,7.03556,40.424],[43.53851,7.03642,40.566],[43.53797,7.03667,40.646],[43.53785,7.03599,40.706],[43.53791,7.03643,40.744],[43.53847,7.03588,40.826],[43.53882,7.0353,40.89],[43.53895,7.03536,40.906],[43.54012,7.03452,41.067],[43.54024,7.03465,41.085],[43.54112,7.03432,41.193],[43.54149,7.03439,41.236],[43.54168,7.03418,41.273],[43.54495,7.03459,41.666],[43.5461,7.0331,41.859],[43.54728,7.03092,42.09],[43.54796,7.03133,42.195]]/*COURSE:END*/;
+
+/* TER stations in race direction. ride = approx. minutes from Nice Ville on a stopping train. Coordinates from OpenStreetMap. */
 const STATIONS=[
- {id:'nice',name:'Nice Ville',ride:0,lat:43.7047,lon:7.2618},
- {id:'staug',name:'Nice Saint-Augustin',ride:5,lat:43.6731,lon:7.2148},
- {id:'stl',name:'Saint-Laurent-du-Var',ride:8,lat:43.6652,lon:7.1932},
- {id:'cros',name:'Cros-de-Cagnes',ride:11,lat:43.6598,lon:7.1690},
- {id:'cagnes',name:'Cagnes-sur-Mer',ride:14,lat:43.6602,lon:7.1487},
- {id:'vlp',name:'Villeneuve-Loubet-Plage',ride:17,lat:43.6391,lon:7.1302},
- {id:'biot',name:'Biot',ride:21,lat:43.6124,lon:7.1206},
- {id:'antibes',name:'Antibes',ride:25,lat:43.5864,lon:7.1199},
- {id:'juan',name:'Juan-les-Pins',ride:29,lat:43.5701,lon:7.1102},
- {id:'gj',name:'Golfe-Juan–Vallauris',ride:32,lat:43.5672,lon:7.0763},
- {id:'cannes',name:'Cannes',ride:39,lat:43.5534,lon:7.0196}
+ {id:'nice',name:'Nice Ville',ride:0,lat:43.70483,lon:7.26166},
+ {id:'staug',name:'Nice Saint-Augustin',ride:5,lat:43.66881,lon:7.21058},
+ {id:'stl',name:'Saint-Laurent-du-Var',ride:8,lat:43.66239,lon:7.19459},
+ {id:'cros',name:'Cros-de-Cagnes',ride:11,lat:43.66056,lon:7.16713},
+ {id:'cagnes',name:'Cagnes-sur-Mer',ride:13,lat:43.65773,lon:7.14843},
+ {id:'vlp',name:'Villeneuve-Loubet-Plage',ride:17,lat:43.62924,lon:7.13406},
+ {id:'biot',name:'Biot',ride:21,lat:43.61183,lon:7.12620},
+ {id:'antibes',name:'Antibes',ride:25,lat:43.58564,lon:7.11944},
+ {id:'juan',name:'Juan-les-Pins',ride:29,lat:43.57102,lon:7.11141},
+ {id:'gj',name:'Golfe-Juan–Vallauris',ride:33,lat:43.56649,lon:7.07360},
+ {id:'cannes',name:'Cannes',ride:40,lat:43.55414,lon:7.01976}
 ];
-/* Viewing spots. km values are approximate except start, Fort Carré relay (21.1) and finish. walk = minutes from station to the course. */
-const SPOTS=[
- {id:'start',name:'Start · Promenade des Anglais',town:'Nice',km:0,st:'nice',walk:15,lat:43.6951,lon:7.2668,note:'By the Théâtre de Verdure. Handisport 07:57, elites 08:00, main field 08:03. Stand west of the start pens.'},
- {id:'magnan',name:'Promenade · Magnan',town:'Nice',km:2.5,st:'nice',walk:22,lat:43.6889,lon:7.2445,note:'Tram L2 (Magnan stop) is closer than the train.'},
- {id:'airport',name:'Promenade · airport end',town:'Nice',km:6.5,st:'staug',walk:12,lat:43.6687,lon:7.2140,note:'Wide promenade, easy to see runners.'},
- {id:'stlaurent',name:'Saint-Laurent seafront',town:'Saint-Laurent-du-Var',km:8.7,st:'stl',walk:8,lat:43.6606,lon:7.1937,note:'Just after the Var bridge, near Cap 3000.'},
- {id:'cros',name:'Cros-de-Cagnes seafront',town:'Cagnes-sur-Mer',km:11.2,st:'cros',walk:4,lat:43.6573,lon:7.1705,note:'Station is a short walk from the seafront road.'},
- {id:'hippo',name:'Hippodrome seafront',town:'Cagnes-sur-Mer',km:13,st:'cagnes',walk:12,lat:43.6538,lon:7.1550,note:'Long straight, runners visible from far off.'},
- {id:'baie',name:'Marina Baie des Anges',town:'Villeneuve-Loubet',km:15.8,st:'vlp',walk:6,lat:43.6401,lon:7.1368,note:'The 20 km race finishes nearby (Les Maurettes), so expect crowds.'},
- {id:'biot',name:'La Brague · Marineland',town:'Biot',km:18.6,st:'biot',walk:5,lat:43.6150,lon:7.1243,note:'Quieter stretch, good for a clear shout.'},
- {id:'fort',name:'Fort Carré · halfway',town:'Antibes',km:21.1,st:'antibes',walk:10,lat:43.5905,lon:7.1268,note:'Duo relay changeover. Busy and loud.'},
- {id:'port',name:'Port Vauban',town:'Antibes',km:22.4,st:'antibes',walk:7,lat:43.5838,lon:7.1272,note:'Last easy spot before the Cap d’Antibes loop.'},
- {id:'salis',name:'Plage de la Salis',town:'Cap d’Antibes',km:24.3,st:'antibes',walk:20,lat:43.5734,lon:7.1311,note:'Climb to La Garoupe high point (~km 27.9) follows.'},
- {id:'juan',name:'Juan-les-Pins · Pinède',town:'Antibes Juan-les-Pins',km:31,st:'juan',walk:6,lat:43.5677,lon:7.1087,note:'Train cuts straight across the Cap. Best leapfrog of the day.'},
- {id:'gj',name:'Golfe-Juan old port',town:'Vallauris Golfe-Juan',km:36,st:'gj',walk:4,lat:43.5652,lon:7.0779,note:'Final push begins. Runners appreciate support here.'},
- {id:'palm',name:'Pointe Croisette · Palm Beach',town:'Cannes',km:39.6,st:'cannes',walk:32,lat:43.5418,lon:7.0389,note:'Long walk from the station; bus or taxi helps.'},
- {id:'finish',name:'Finish · La Croisette',town:'Cannes',km:FULL,st:'cannes',walk:20,lat:43.5484,lon:7.0306,note:'Opposite the Martinez. Agree a meeting point after the finish area.'}
-];
+/* Viewing spots: lat/lon is the point on the course, km from the calibrated line, walk = routed minutes from the station at 4.8 km/h. */
+const SPOTS=/*SPOTS:BEGIN*/[{"id":"start","name":"Start · Promenade des Anglais","town":"Nice","st":"nice","note":"By the Théâtre de Verdure. Handisport 07:57, elites 08:00, main field 08:03. Stand west of the start pens.","km":0.0,"walk":16,"lat":43.69539,"lon":7.26738},{"id":"magnan","name":"Promenade · Magnan","town":"Nice","st":"nice","note":"A long walk from Nice Ville; tram line 2 gets you closer.","km":2.2,"walk":32,"lat":43.68991,"lon":7.24403},{"id":"airport","name":"Promenade · airport","town":"Nice","st":"staug","note":"Wide promenade beside the airport, easy viewing.","km":6.8,"walk":6,"lat":43.66618,"lon":7.21068},{"id":"stlaurent","name":"Saint-Laurent seafront","town":"Saint-Laurent-du-Var","st":"stl","note":"Just after the Var bridge, by Cap 3000.","km":8.8,"walk":9,"lat":43.65794,"lon":7.19297},{"id":"cros","name":"Cros-de-Cagnes seafront","town":"Cagnes-sur-Mer","st":"cros","note":"Old fishing-village seafront, short walk from the station.","km":11.1,"walk":9,"lat":43.65759,"lon":7.16808},{"id":"plage","name":"Cagnes seafront · Hippodrome","town":"Cagnes-sur-Mer","st":"cagnes","note":"Long straight; you can see runners coming from far off.","km":12.9,"walk":16,"lat":43.64972,"lon":7.15116},{"id":"baie","name":"Marina Baie des Anges","town":"Villeneuve-Loubet","st":"vlp","note":"The 20 km race finishes nearby, so expect crowds.","km":15.3,"walk":11,"lat":43.63401,"lon":7.13517},{"id":"biot","name":"La Brague · Biot","town":"Biot","st":"biot","note":"Quieter stretch, good for a clear shout.","km":18.0,"walk":6,"lat":43.615,"lon":7.1275},{"id":"fort","name":"Fort Carré · halfway","town":"Antibes","st":"antibes","note":"Duo relay changeover. Busy and loud.","km":21.1,"walk":11,"lat":43.59035,"lon":7.12448},{"id":"port","name":"Port Vauban","town":"Antibes","st":"antibes","note":"Last easy spot before the Cap d’Antibes loop.","km":22.4,"walk":10,"lat":43.586,"lon":7.12551},{"id":"salis","name":"Plage de la Salis","town":"Cap d’Antibes","st":"antibes","note":"Start of the Cap loop; the climb to La Garoupe follows.","km":24.8,"walk":26,"lat":43.5704,"lon":7.12853},{"id":"juan","name":"Juan-les-Pins · Pinède","town":"Antibes Juan-les-Pins","st":"juan","note":"The train cuts across the Cap, so this is the best leapfrog of the day.","km":31.6,"walk":8,"lat":43.56756,"lon":7.11343},{"id":"gj","name":"Golfe-Juan old port","town":"Vallauris Golfe-Juan","st":"gj","note":"The final push begins here; runners appreciate support.","km":34.8,"walk":8,"lat":43.56691,"lon":7.0792},{"id":"palm","name":"Pointe Croisette · Palm Beach","town":"Cannes","st":"cannes","note":"Long walk from Cannes station; a bus or taxi helps.","km":40.7,"walk":34,"lat":43.53791,"lon":7.03643},{"id":"finish","name":"Finish · La Croisette","town":"Cannes","st":"cannes","note":"Opposite the Martinez. Agree a meeting point beyond the finish area.","km":42.195,"walk":19,"lat":43.54796,"lon":7.03133}]/*SPOTS:END*/;
 const stById=Object.fromEntries(STATIONS.map(s=>[s.id,s]));
 
-const DEFAULTS={runner:'Your runner',bib:'',target:'4:00:00',gun:'08:03',delay:3,slow:3,headway:20,conservative:true,buffer:5,
-  tracking:'https://www.marathon06.com',splits:[],loc:'start',planFrom:'start',km:{},walk:{},sim:null,simOn:null};
+const DEFAULTS={runner:'',bib:'',th:4,tm:0,gun:'08:03',delay:3,slow:3,headway:20,conservative:true,buffer:5,
+  tracking:'https://www.marathon06.com',splits:[],loc:'start',km:{},walk:{},sim:130,simOn:null};
 let S=load();
-function load(){try{const v=JSON.parse(localStorage.getItem('rrs')||'null');return Object.assign({},DEFAULTS,v||{});}catch(e){return Object.assign({},DEFAULTS);}}
-function save(){try{localStorage.setItem('rrs',JSON.stringify(S));}catch(e){}}
+function load(){try{const v=JSON.parse(localStorage.getItem('rrs2')||'null');return Object.assign({},DEFAULTS,v||{});}catch(e){return Object.assign({},DEFAULTS);}}
+function save(){try{localStorage.setItem('rrs2',JSON.stringify(S));}catch(e){}}
 
-/* ---------- time helpers (all race times are Paris time) ---------- */
-const fmtHM=new Intl.DateTimeFormat('en-GB',{timeZone:TZ,hour:'2-digit',minute:'2-digit'});
-const fmtHMS=new Intl.DateTimeFormat('en-GB',{timeZone:TZ,hour:'2-digit',minute:'2-digit',second:'2-digit'});
-const hm=t=>fmtHM.format(t);
-function at(hhmm){const p=String(hhmm).trim().split(':');if(p.length<2)return NaN;
-  const s=p.map(x=>x.padStart(2,'0'));while(s.length<3)s.push('00');return Date.parse(`${RACE_DATE}T${s[0]}:${s[1]}:${s[2]}${OFFSET}`);}
-function dur(str){const p=String(str).trim().split(':').map(Number);if(p.some(isNaN))return NaN;
-  if(p.length===3)return((p[0]*60+p[1])*60+p[2])*1000;if(p.length===2)return(p[0]*60+p[1])*1000;return NaN;}
-function fmtDur(ms){const neg=ms<0;ms=Math.abs(ms);const t=Math.round(ms/1000),h=Math.floor(t/3600),m=Math.floor(t%3600/60),s=t%60;
-  return(neg?'-':'')+h+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');}
-function pace(msPerKm){const s=Math.round(msPerKm/1000);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')+'/km';}
-const MIN=60000;
-const kmTxt=k=>k>=FULL?'42.2':String(+(+k).toFixed(1));
+/* ---------- time ---------- */
+const fHM=new Intl.DateTimeFormat('en-GB',{timeZone:TZ,hour:'2-digit',minute:'2-digit'});
+const fHMS=new Intl.DateTimeFormat('en-GB',{timeZone:TZ,hour:'2-digit',minute:'2-digit',second:'2-digit'});
+const hm=t=>fHM.format(t);
+function at(hhmm){const p=String(hhmm).trim().split(':');if(p.length<2)return NaN;const s=p.map(x=>x.padStart(2,'0'));while(s.length<3)s.push('00');
+  return Date.parse(`${RACE_DATE}T${s[0]}:${s[1]}:${s[2]}${OFFSET}`);}
+function fmtDur(ms){const t=Math.round(Math.abs(ms)/1000),h=Math.floor(t/3600),m=Math.floor(t%3600/60),s=t%60;return h+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');}
+function inMin(ms){const m=Math.round(ms/MIN);if(Math.abs(m)<1)return'now';const a=Math.abs(m),h=Math.floor(a/60),r=a%60,txt=h?`${h} h ${String(r).padStart(2,'0')}`:`${a} min`;return m>0?`in ${txt}`:`${txt} ago`;}
+const pace=ms=>{const s=Math.round(ms/1000);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');};
+const kmTxt=k=>k>=FULL-0.01?'42.2':(+k).toFixed(1).replace(/\.0$/,'');
 const simBase=at('07:30');
-function now(){return simActive()?simBase+(S.sim??130)*MIN:Date.now();}
 function simActive(){if(S.simOn!==null)return S.simOn;const t=Date.now();return t<at('07:00')||t>at('17:00');}
+function now(){return simActive()?simBase+(+S.sim)*MIN:Date.now();}
 
-/* ---------- course data with user overrides ---------- */
-function spots(){return SPOTS.map(s=>Object.assign({},s,{km:S.km[s.id]!=null?+S.km[s.id]:s.km,walk:S.walk[s.id]!=null?+S.walk[s.id]:s.walk})).sort((a,b)=>a.km-b.km);}
-function locations(){return spots().map(s=>({id:s.id,label:`${s.name} (km ${kmTxt(s.km)})`,st:s.st,walk:s.walk,km:s.km,spot:s}))
-  .concat(STATIONS.map(s=>({id:'st:'+s.id,label:`${s.name} station`,st:s.id,walk:0,km:null,spot:null})));}
+/* ---------- course ---------- */
+function spots(){return SPOTS.map((s,i)=>Object.assign({},s,{n:i+1,km:S.km[s.id]!=null?+S.km[s.id]:s.km,walk:S.walk[s.id]!=null?+S.walk[s.id]:s.walk})).sort((a,b)=>a.km-b.km);}
+function spotById(id){return spots().find(s=>s.id===id);}
+function locations(){return spots().map(s=>({id:s.id,label:s.name,sub:`km ${kmTxt(s.km)}`,st:s.st,walk:s.walk,spot:s,lat:s.lat,lon:s.lon}))
+  .concat(STATIONS.map(s=>({id:'st:'+s.id,label:s.name+' station',sub:'station',st:s.id,walk:0,spot:null,lat:s.lat,lon:s.lon})));}
 function locById(id){return locations().find(l=>l.id===id)||locations()[0];}
+function pointAt(km){if(!COURSE.length)return null;km=Math.max(0,Math.min(FULL,km));
+  for(let i=1;i<COURSE.length;i++){const a=COURSE[i-1],b=COURSE[i];if(km<=b[2]){const f=(km-a[2])/((b[2]-a[2])||1);return[a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f];}}
+  const l=COURSE[COURSE.length-1];return[l[0],l[1]];}
+function lineUpTo(km){const out=[];for(const c of COURSE){if(c[2]<=km)out.push([c[0],c[1]]);else break;}const p=pointAt(km);if(p)out.push(p);return out;}
 
 /* ---------- runner model ---------- */
 function cross(){return at(S.gun)+(+S.delay||0)*MIN;}
-function targetPace(){const d=dur(S.target);return isNaN(d)?(4*3600000)/FULL:d/FULL;}
-function points(){return [{km:0,t:cross()}].concat(S.splits.slice().sort((a,b)=>a.km-b.km));}
-function livePace(){const p=points(),l=p[p.length-1];return l.km>0?(l.t-cross())/l.km:targetPace();}
-function futurePace(){const p=points(),l=p[p.length-1];return l.km>0?livePace()*(1+(+S.slow||0)/100):targetPace();}
-function eta(km){const p=points();
-  for(let i=1;i<p.length;i++){if(km<=p[i].km){const a=p[i-1],b=p[i];return a.t+(b.t-a.t)*(km-a.km)/(b.km-a.km||1);}}
+function targetMs(){return((+S.th||0)*60+(+S.tm||0))*MIN||4*3600000;}
+function targetPace(){return targetMs()/FULL;}
+function points(){return[{km:0,t:cross()}].concat(S.splits.filter(s=>s.km>0).sort((a,b)=>a.km-b.km));}
+function lastPt(){const p=points();return p[p.length-1];}
+function livePace(){const l=lastPt();return l.km>0?(l.t-cross())/l.km:targetPace();}
+function futurePace(){const l=lastPt();return l.km>0?livePace()*(1+(+S.slow||0)/100):targetPace();}
+function eta(km){const p=points();for(let i=1;i<p.length;i++){if(km<=p[i].km){const a=p[i-1],b=p[i];return a.t+(b.t-a.t)*(km-a.km)/((b.km-a.km)||1);}}
   const l=p[p.length-1];return l.t+(km-l.km)*futurePace();}
-function kmAt(t){const p=points();if(t<=p[0].t)return 0;
-  for(let i=1;i<p.length;i++){if(t<=p[i].t){const a=p[i-1],b=p[i];return a.km+(b.km-a.km)*(t-a.t)/(b.t-a.t||1);}}
+function kmAt(t){const p=points();if(t<=p[0].t)return 0;for(let i=1;i<p.length;i++){if(t<=p[i].t){const a=p[i-1],b=p[i];return a.km+(b.km-a.km)*(t-a.t)/((b.t-a.t)||1);}}
   const l=p[p.length-1];return Math.min(FULL,l.km+(t-l.t)/futurePace());}
+function nearestTown(k){return spots().reduce((a,s)=>Math.abs(s.km-k)<Math.abs(a.km-k)?s:a).town;}
 
-/* ---------- spectator travel model ---------- */
-function wait(){return S.conservative?+S.headway:+S.headway/2;}
-function trip(from,toSpot){ // returns {min, legs[]}
-  const to=stById[toSpot.st];
-  if(from.st===toSpot.st){const m=(from.walk||0)+toSpot.walk;return{min:m,legs:[`Walk about ${m} min to ${toSpot.name}`]};}
-  const a=stById[from.st],ride=Math.max(2,Math.abs(to.ride-a.ride));
-  const m=(from.walk||0)+wait()+ride+2+toSpot.walk;
-  const legs=[];if(from.walk)legs.push(`Walk ${from.walk} min to ${a.name} station`);
-  legs.push(`Train to ${to.name} (${ride} min ride, allow ${Math.round(wait())} min for the next train)`);
-  legs.push(`Walk ${toSpot.walk} min to the course`);
-  return{min:m,legs};}
+/* ---------- travel ---------- */
+function waitMin(){return S.conservative?+S.headway:+S.headway/2;}
+function trip(from,to){const a=stById[from.st],b=stById[to.st];
+  if(from.st===to.st){const m=(from.walk||0)+to.walk;return{min:m,train:false,legs:[{ic:'W',txt:`Walk about ${m} min to ${to.name}`}]};}
+  const ride=Math.max(2,Math.abs(b.ride-a.ride)),m=(from.walk||0)+waitMin()+ride+2+to.walk,legs=[];
+  if(from.walk)legs.push({ic:'W',txt:`Walk ${from.walk} min to ${a.name} station`});
+  legs.push({ic:'T',txt:`Train to ${b.name} · ${ride} min ride (allow ${Math.round(waitMin())} min for the next train)`});
+  legs.push({ic:'W',txt:`Walk ${to.walk} min to the course`});
+  return{min:m,train:true,legs,fromSt:a,toSt:b};}
 function status(slack){return slack>=+S.buffer?['good','Catch']:slack>=0?['warn','Tight']:['bad','Miss'];}
+function fromOf(loc){return{st:loc.st,walk:loc.walk||0};}
 
-/* Best sequence of sightings from where you are now (dynamic programming over spots in course order). */
+/* Most sightings reachable from a location, in course order (dynamic programming). */
 function bestPlan(fromId){
   const t0=now(),loc=locById(fromId),list=spots(),rk=kmAt(t0);
   let depart=t0,seed=null;
   if(loc.spot&&eta(loc.spot.km)>=t0){seed={spot:loc.spot,see:eta(loc.spot.km)};depart=seed.see+MIN;}
   const minKm=seed?seed.spot.km:rk;
-  const cand=list.filter(s=>s.km>minKm+0.05&&eta(s.km)>t0);
-  const best=[];
-  cand.forEach((s,j)=>{
-    const see=eta(s.km);let b=null;
-    const consider=(count,minSlack,prev,dep,from)=>{const tr=trip(from,s),arr=dep+tr.min*MIN,slack=(see-arr)/MIN;
-      if(slack<+S.buffer)return;const ms=Math.min(minSlack,slack);
-      if(!b||count>b.count||(count===b.count&&ms>b.minSlack))b={count,minSlack:ms,prev,dep,arr,slack,legs:tr.legs,spot:s,see};};
-    consider((seed?2:1),Infinity,-1,depart,loc);
-    for(let i=0;i<j;i++){const p=best[i];if(!p)continue;
-      consider(p.count+1,p.minSlack,i,p.see+MIN,{st:p.spot.st,walk:p.spot.walk});}
+  const cand=list.filter(s=>s.km>minKm+0.05&&eta(s.km)>t0),best=[];
+  cand.forEach((s,j)=>{const see=eta(s.km);let b=null;
+    const consider=(count,minSlack,prev,dep,from)=>{const tr=trip(from,s),arr=dep+tr.min*MIN,slack=(see-arr)/MIN;if(slack<+S.buffer)return;
+      const ms=Math.min(minSlack,slack);if(!b||count>b.count||(count===b.count&&ms>b.minSlack))b={count,minSlack:ms,prev,dep,arr,slack,tr,spot:s,see};};
+    const w=s.id==='finish'?0.9:1;
+    consider((seed?1:0)+w,Infinity,-1,depart,fromOf(loc));
+    for(let i=0;i<j;i++){const p=best[i];if(p)consider(p.count+w,p.minSlack,i,p.see+MIN,{st:p.spot.st,walk:p.spot.walk});}
     best[j]=b;});
-  let end=-1;best.forEach((b,j)=>{if(!b)return;const e=best[end];
-    if(end<0||b.count>e.count||(b.count===e.count&&b.spot.km>e.spot.km)||(b.count===e.count&&b.spot.km===e.spot.km&&b.minSlack>e.minSlack))end=j;});
+  /* Rank plans: most sightings; then still reaching the finish before them; then a comfortable 10-min margin; then the earlier sighting. */
+  const fin0=list.find(s=>s.id==='finish');
+  const key=b=>{let meetOk=1;if(fin0&&b.spot.id!=='finish'){const tr=trip({st:b.spot.st,walk:b.spot.walk},fin0);meetOk=b.see+MIN+tr.min*MIN<=eta(FULL)?1:0;}
+    return[Math.round(b.count*10),meetOk,b.minSlack>=10?1:0,-b.spot.km];};
+  const better=(x,y)=>{for(let i=0;i<x.length;i++){if(x[i]!==y[i])return x[i]>y[i];}return false;};
+  let end=-1,ek=null;best.forEach((b,j)=>{if(!b)return;const k=key(b);if(end<0||better(k,ek)){end=j;ek=k;}});
   const chain=[];for(let j=end;j>=0;j=best[j].prev)chain.unshift(best[j]);
-  return{seed,chain,loc,rk};}
+  /* If the plan doesn't end at the finish, add the trip to meet them there. */
+  let meet=null;const fin=list.find(s=>s.id==='finish'),last=chain.length?chain[chain.length-1]:seed;
+  if(fin&&(!last||last.spot.id!=='finish')){const dep=last?last.see+MIN:depart,from=last?{st:last.spot.st,walk:last.spot.walk}:fromOf(loc),tr=trip(from,fin);
+    meet={spot:fin,dep,tr,arr:dep+tr.min*MIN,see:eta(FULL)};}
+  return{seed,chain,loc,rk,t0,meet};}
 
-/* ---------- rendering ---------- */
-const $=s=>document.querySelector(s), esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const mapUrl=(lat,lon,q)=>`https://maps.apple.com/?ll=${lat},${lon}&q=${encodeURIComponent(q)}`;
-function view(){const v=(location.hash||'#now').slice(1);return['now','plan','course','setup'].includes(v)?v:'now';}
+/* ---------- links ---------- */
+const gDir=(lat,lon,mode)=>`https://www.google.com/maps/dir/?api=1&destination=${lat},${lon}&travelmode=${mode}`;
+const gPin=(lat,lon)=>`https://www.google.com/maps/search/?api=1&query=${lat},${lon}`;
+const ICON={nav:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-8-8 18-2-8-8-2z"/></svg>',
+  train:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 11h14M8 21l2-4M16 21l-2-4"/></svg>',
+  walk:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="2"/><path d="m9 21 3-7 3 3v4M7 12l3-4 4 1 3 3"/></svg>'};
+function navButtons(spot,tr,cls){
+  const a=[];
+  if(tr&&tr.train){a.push(`<a class="btn ${cls[0]} block" href="${gDir(spot.lat,spot.lon,'transit')}" target="_blank" rel="noopener">${ICON.nav}Navigate</a>`);
+    a.push(`<a class="btn ${cls[1]} block" href="${gDir(tr.fromSt.lat,tr.fromSt.lon,'walking')}" target="_blank" rel="noopener">${ICON.walk}Walk to station</a>`);}
+  else a.push(`<a class="btn ${cls[0]} block" href="${gDir(spot.lat,spot.lon,'walking')}" target="_blank" rel="noopener">${ICON.nav}Navigate</a>`);
+  return a.join('');}
+
+/* ---------- UI helpers ---------- */
+const $=s=>document.querySelector(s),$$=s=>Array.from(document.querySelectorAll(s));
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let toastTimer=0;function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.hidden=true,3600);}
+function view(){const v=(location.hash||'#live').slice(1);return['live','map','plan','runner'].includes(v)?v:'live';}
+const runnerName=()=>S.runner.trim()||'Your runner';
 
 function header(){
-  const t=now();$('#clock').textContent=fmtHMS.format(t);
-  const on=simActive();$('#simOn').checked=on;$('#simT').disabled=!on;
-  $('#simT').value=S.sim==null?130:S.sim;$('#simLbl').textContent=on?hm(simBase+(+$('#simT').value)*MIN):'live';
+  const t=now(),on=simActive();$('#clock').textContent=fHMS.format(t);
+  $('#rehearse').hidden=!on;if(on){$('#rhLbl').textContent='Rehearsal '+hm(t);if(document.activeElement!==$('#simT'))$('#simT').value=S.sim;}
 }
 
+/* ---------- live ---------- */
 function runnerCard(){
-  const t=now(),k=kmAt(t),fin=eta(FULL),started=t>=cross(),done=k>=FULL;
-  const ticks=[0,10,21.1,30,FULL].map(x=>`<span class="tick" style="left:${x/FULL*100}%"></span>`).join('');
-  const lastSplit=S.splits.length?S.splits.slice().sort((a,b)=>b.km-a.km)[0]:null;
-  const near=spots().reduce((a,s)=>Math.abs(s.km-k)<Math.abs(a.km-k)?s:a);
-  return `<section class="card" aria-label="Runner">
-    <div class="top-row"><span class="eyebrow">${esc(S.runner)}${S.bib?' · bib '+esc(S.bib):''}</span>
-      <a class="small" href="${esc(S.tracking)}" target="_blank" rel="noopener">Official live tracking ↗</a></div>
-    <div class="runner-km">${done?'Finished':started?'≈ km '+k.toFixed(1):'Not started'} ${started&&!done?`<small>near ${esc(near.town)}</small>`:''}</div>
-    <div class="bar" role="img" aria-label="Progress ${Math.round(k/FULL*100)} percent">
-      <span class="track"></span><span class="done" style="width:${k/FULL*100}%"></span>${ticks}
-      <span class="dot" style="left:${k/FULL*100}%"></span></div>
-    <div class="bar-labels"><span>Nice</span><span>Antibes ½</span><span>Cannes</span></div>
-    <div class="statline">
-      <span>Pace <b>${pace(lastSplit?livePace():targetPace())}</b></span>
-      <span>Finish ≈ <b>${hm(fin)}</b> (<b>${fmtDur(fin-cross())}</b>)</span>
-      <span class="muted">${lastSplit?`From split at km ${lastSplit.km} · ${hm(lastSplit.t)}`:'From target time · add a split to correct it'}</span>
-    </div></section>`;}
+  const t=now(),k=kmAt(t),fin=eta(FULL),started=t>=cross(),done=k>=FULL-0.001,l=lastPt();
+  const ticks=[10,21.1,30].map(x=>`<span class="tick" style="left:${x/FULL*100}%"></span>`).join('');
+  const head=!started?`<div class="big">Starts <small>${inMin(cross()-t)}</small></div>`:done?`<div class="big">Finished <small>≈ ${hm(fin)}</small></div>`:`<div class="big">km ${k.toFixed(1)}<small>near ${esc(nearestTown(k))}</small></div>`;
+  return `<section class="card runner" aria-label="Runner">
+    <div class="runner-top"><span class="eyebrow">${esc(runnerName())}${S.bib?' · #'+esc(S.bib):''}</span>
+      <a class="small" href="${esc(S.tracking)}" target="_blank" rel="noopener">Official tracking ↗</a></div>
+    ${head}
+    <div><div class="bar" role="img" aria-label="${Math.round(k/FULL*100)} percent of the course done"><span class="track"></span><span class="done" style="width:${k/FULL*100}%"></span>${ticks}<span class="dot" style="left:${k/FULL*100}%"></span></div>
+    <div class="bar-labels"><span>Nice</span><span>Antibes</span><span>Cannes</span></div></div>
+    <div class="stats">
+      <div class="stat"><b>${pace(l.km>0?livePace():targetPace())}</b><span>pace /km</span></div>
+      <div class="stat"><b>${hm(fin)}</b><span>finish ≈</span></div>
+      <div class="stat"><b>${fmtDur(fin-cross())}</b><span>race time</span></div>
+    </div>
+    <div class="runner-top"><span class="source">${l.km>0?`Based on km ${kmTxt(l.km)} at ${hm(l.t)}`:'Based on the target time'}</span>
+      <button class="btn" data-act="split" style="min-height:40px;padding:6px 14px">Update position</button></div>
+  </section>`;}
 
-function nowView(){
-  const t=now(),loc=locById(S.loc),rk=kmAt(t);
-  let depart=t,banner='';
-  if(loc.spot){const see=eta(loc.spot.km);
-    if(see>=t){depart=see+MIN;banner=`<div class="waiting">They reach you at ${esc(loc.spot.name)} ≈ ${hm(see)} (in ${Math.round((see-t)/MIN)} min). Stay here, then pick your next spot below.</div>`;}}
-  const from=loc.spot?{st:loc.st,walk:loc.walk}:{st:loc.st,walk:0};
-  const minKm=loc.spot&&eta(loc.spot.km)>=t?loc.spot.km:rk;
+function heroCard(){
+  const p=bestPlan(S.loc),t=p.t0;
+  if(p.seed){const s=p.seed.spot,nx=p.chain[0];
+    return `<section class="hero"><span class="eyebrow">Stay where you are</span>
+      <h2>${esc(s.name)}</h2>
+      <div class="when"><span class="t">≈ ${hm(p.seed.see)}</span><span class="count">${inMin(p.seed.see-t)}</span></div>
+      <p>${esc(runnerName())} should pass you here. Tap the button when you see them; it corrects every prediction.</p>
+      <div class="btns"><button class="btn sun block" data-act="seen">I just saw them</button></div>
+      ${nx?`<div class="then"><b>Then:</b> ${esc(nx.spot.name)}, leave by ${hm(nx.see-(+S.buffer)*MIN-nx.tr.min*MIN)} to see them there at ≈ ${hm(nx.see)}.</div>`:'<div class="then">After that, head to the finish to meet them.</div>'}
+    </section>`;}
+  const nx=p.chain[0];
+  if(nx){const leaveBy=nx.see-(+S.buffer)*MIN-nx.tr.min*MIN,s=nx.spot,after=p.chain[1];
+    const nOn=p.chain.filter(c=>c.spot.id!=='finish').length;
+    return `<section class="hero"><span class="eyebrow">Your next move${nOn?` · ${nOn} more sighting${nOn>1?'s':''} possible`:''}</span>
+      <h2>${esc(s.name)}</h2>
+      <div class="when"><span class="t">Leave by ${hm(leaveBy)}</span><span class="count">${leaveBy-t<MIN?'go now':inMin(leaveBy-t)}</span></div>
+      <ul class="legs">${nx.tr.legs.map(l=>`<li><span class="ic">${l.ic}</span><span>${esc(l.txt)}</span></li>`).join('')}</ul>
+      <p class="small">Runner there ≈ <b class="mono">${hm(nx.see)}</b> · you arrive ≈ <b class="mono">${hm(nx.arr)}</b> if you leave now (${Math.round(nx.slack)} min spare)</p>
+      <div class="btns">${navButtons(s,nx.tr,['onsea','onsea-ghost'])}<button class="btn onsea-ghost block" data-act="arrived" data-id="${s.id}">I'm there</button></div>
+      ${after?`<div class="then"><b>Then:</b> ${esc(after.spot.name)} ≈ ${hm(after.see)}</div>`:p.meet?`<div class="then"><b>Then:</b> meet them at the finish. They finish ≈ ${hm(p.meet.see)}; you get there ≈ ${hm(p.meet.arr)}.</div>`:''}
+    </section>`;}
+  const fin=spotById('finish');
+  return `<section class="hero"><span class="eyebrow">Your next move</span><h2>Meet them at the finish</h2>
+    <p>No spot ahead of the runner can be reached in time from here. The finish is on La Croisette, opposite the Martinez. ${esc(runnerName())} finishes ≈ <b class="mono">${hm(eta(FULL))}</b>.</p>
+    <div class="btns"><a class="btn onsea block" href="${gDir(fin.lat,fin.lon,'transit')}" target="_blank" rel="noopener">${ICON.nav}Navigate to finish</a></div></section>`;}
+
+function optionsCard(){
+  const t=now(),loc=locById(S.loc),rk=kmAt(t);let depart=t,minKm=rk;
+  if(loc.spot&&eta(loc.spot.km)>=t){depart=eta(loc.spot.km)+MIN;minKm=loc.spot.km;}
   let missed=0;
   const rows=spots().filter(s=>s.km>minKm+0.05&&s.id!==loc.id).map(s=>{
-    const tr=trip(from,s),arr=depart+tr.min*MIN,see=eta(s.km),slack=(see-arr)/MIN,[c,l]=status(slack);
-    if(c==='bad'){missed++;return '';}
-    return `<li class="opt"><span class="km">km ${kmTxt(s.km)}</span>
-      <span class="nm">${esc(s.name)}<br><span class="small muted">${esc(s.town)} · runner ≈ ${hm(see)}</span></span>
-      <span class="pill ${c}">${l}${c!=='bad'?' +'+Math.round(slack):''}</span>
-      <span class="how">Leave ${hm(depart)}, arrive ≈ ${hm(arr)}. ${tr.legs.map(esc).join(' → ')}</span></li>`;}).join('');
-  $('#view').innerHTML=runnerCard()+`
-  <section class="card"><div class="btns">
-    ${loc.spot?`<button class="btn sun" id="seen">I just saw them here</button>`:''}
-    <button class="btn" id="addSplit">Add split from tracking</button>
-    <button class="btn ghost" id="wake">Keep screen awake</button></div>
-    <form id="splitForm" class="grid2" hidden>
-      <div class="field"><label for="sKm">Km</label><input id="sKm" inputmode="decimal" placeholder="21.1"></div>
-      <div class="field"><label for="sT">Chip time (h:mm:ss) or clock (hh:mm)</label><input id="sT" placeholder="1:58:40"></div>
-      <div class="btns"><button class="btn primary" type="submit">Save split</button></div>
-    </form>
-    <p class="small muted" id="msg" role="status"></p></section>
-  <section class="card"><div class="field"><label for="loc">I am at</label>
-    <select id="loc">${locations().map(l=>`<option value="${l.id}" ${l.id===S.loc?'selected':''}>${esc(l.label)}</option>`).join('')}</select></div>
-    ${banner}
-    <h3>Where can I catch them next?</h3>
-    ${rows?`<ul class="opts">${rows}</ul>`:'<p class="muted">You cannot reach any spot ahead of the runner in time. Head for the finish meeting point.</p>'}
-    ${missed?`<p class="small muted">${missed} nearer spot${missed>1?'s are':' is'} out of reach from here.</p>`:''}
-    <p class="small muted">“Catch” leaves at least ${S.buffer} min spare. Times assume a train every ${S.headway} min${S.conservative?' and that you just missed one':''}. Check real departures in SNCF Connect.</p>
-  </section>`+splitsCard();
-  $('#loc').onchange=e=>{S.loc=e.target.value;save();render();};
-  const seen=$('#seen');if(seen)seen.onclick=()=>{addSplit(loc.spot.km,now());flash(`Logged: km ${loc.spot.km} at ${hm(now())}. Projections updated.`);};
-  $('#addSplit').onclick=()=>{$('#splitForm').hidden=!$('#splitForm').hidden;};
-  $('#splitForm').onsubmit=e=>{e.preventDefault();const km=parseFloat($('#sKm').value.replace(',','.')),v=$('#sT').value.trim();
-    if(!(km>0&&km<=FULL)){flash('Enter a km between 0 and 42.195.');return;}
-    let t;const parts=v.split(':');
-    if(parts.length===3)t=cross()+dur(v);else if(parts.length===2)t=at(v);
-    if(!t||isNaN(t)){flash('Enter chip time like 1:58:40, or clock time like 10:05.');return;}
-    addSplit(km,t);flash(`Saved split: km ${km} at ${hm(t)}.`);};
-  $('#wake').onclick=async()=>{try{await navigator.wakeLock.request('screen');flash('Screen will stay on while this page is open.');}catch(e){flash('This browser would not keep the screen on. Set Auto-Lock to Never in Settings › Display.');}};
-  bindSplitDeletes();}
+    const tr=trip(fromOf(loc),s),arr=depart+tr.min*MIN,see=eta(s.km),slack=(see-arr)/MIN,[c,l]=status(slack);
+    if(c==='bad'){missed++;return'';}
+    return `<li><button class="opt" data-act="spot" data-id="${s.id}"><span class="k">km ${kmTxt(s.km)}</span><span class="nm">${esc(s.name)}</span><span class="pill ${c}">${l} +${Math.round(slack)}</span>
+      <span class="sub">Runner ≈ ${hm(see)} · you ≈ ${hm(arr)} · ${tr.train?'train to '+esc(tr.toSt.name):'on foot'}</span></button></li>`;}).join('');
+  return `<section class="card"><div class="where"><div><span class="eyebrow">You are at</span><b>${esc(loc.label)}</b></div><button class="chip" data-act="where">Change</button></div>
+    <h3>All reachable spots</h3>
+    ${rows?`<ul class="opts">${rows}</ul>`:'<p class="empty">None from here. Head for the finish.</p>'}
+    <p class="small muted">${missed?`${missed} nearer spot${missed>1?'s are':' is'} out of reach. `:''}Leaving ${loc.spot&&eta(loc.spot.km)>=t?'after they pass you':'now'}; “Catch” means at least ${S.buffer} min spare. Trains every ${S.headway} min${S.conservative?', assuming you just missed one':''}.</p>
+  </section>`;}
 
-function splitsCard(){
-  if(!S.splits.length)return '';
-  const li=S.splits.slice().sort((a,b)=>a.km-b.km).map((s,i)=>`<li><span class="mono">km ${s.km}</span><span class="mono">${hm(s.t)} · ${fmtDur(s.t-cross())}</span><button class="x" data-del="${s.km}" aria-label="Delete split at km ${s.km}">Delete</button></li>`).join('');
-  return `<section class="card"><h3>Splits</h3><ul class="splits">${li}</ul></section>`;}
-function bindSplitDeletes(){document.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{S.splits=S.splits.filter(s=>String(s.km)!==b.dataset.del);save();render();});}
-function addSplit(km,t){S.splits=S.splits.filter(s=>s.km!==km);S.splits.push({km,t});save();render();}
-let flashMsg='';function flash(m){flashMsg=m;const el=$('#msg');if(el)el.textContent=m;}
+function liveView(){$('#view').innerHTML=heroCard()+runnerCard()+optionsCard();}
 
+/* ---------- map ---------- */
+let M=null;
+function mapView(){
+  $('#view').innerHTML=`<section class="mapbox"><div id="map" role="application" aria-label="Course map"></div>
+    <div class="map-ctrl"><button id="mRun" type="button" aria-label="Centre on runner">Runner</button><button id="mMe" type="button" aria-label="Show my location">Me</button><button id="mAll" type="button" aria-label="Show the whole course">All</button></div>
+    <div class="map-note" id="mapNote" hidden></div></section>
+    <div class="legend"><span><i class="lg-run"></i>Runner (predicted)</span><span><i class="lg-spot"></i>Viewing spot</span><span><i class="lg-st"></i>Train station</span><span><i class="lg-line"></i>Covered so far</span></div>
+    <section class="card" id="mapInfo"></section>`;
+  if(!window.L){$('#map').innerHTML='<p class="empty" style="padding:16px">The map library did not load. Check your connection and reopen this tab.</p>';mapInfo(nextSpotId());return;}
+  const dark=matchMedia('(prefers-color-scheme: dark)').matches&&document.documentElement.dataset.theme!=='light'||document.documentElement.dataset.theme==='dark';
+  const map=L.map('map',{zoomControl:false,attributionControl:true});
+  const tiles=L.tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/${dark?'dark_all':'voyager'}/{z}/{x}/{y}{r}.png`,{subdomains:'abcd',maxZoom:19,
+    attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/attributions">CARTO</a>'}).addTo(map);
+  let errs=0;tiles.on('tileerror',()=>{if(++errs===3){const n=$('#mapNote');if(n){n.hidden=false;n.textContent='Street map tiles are unavailable here. Course, spots and stations are still accurate.';}}});
+  const css=getComputedStyle(document.documentElement),sea=css.getPropertyValue('--sea').trim(),muted=css.getPropertyValue('--muted').trim();
+  const full=L.polyline(COURSE.map(c=>[c[0],c[1]]),{color:sea,weight:5,opacity:.4,lineCap:'round'}).addTo(map);
+  const done=L.polyline([],{color:sea,weight:6,opacity:.95,lineCap:'round'}).addTo(map);
+  [5,10,15,20,25,30,35,40].forEach(k=>{const p=pointAt(k);L.marker(p,{icon:L.divIcon({className:'',html:`<div class="m-km">${k}</div>`,iconSize:[24,16],iconAnchor:[12,8]}),interactive:false,keyboard:false}).addTo(map);});
+  STATIONS.forEach(s=>{L.marker([s.lat,s.lon],{title:s.name+' station',icon:L.divIcon({className:'',html:`<div class="m-st">${ICON.train}</div>`,iconSize:[18,18],iconAnchor:[9,9]})}).addTo(map).on('click',()=>stationInfo(s.id));});
+  const spotMarkers={};
+  spots().forEach(s=>{spotMarkers[s.id]=L.marker([s.lat,s.lon],{title:s.name,riseOnHover:true,icon:L.divIcon({className:'',html:`<div class="m-spot">${s.n}</div>`,iconSize:[28,28],iconAnchor:[14,14]})}).addTo(map).on('click',()=>{M.sel=s.id;mapTick();mapInfo(s.id);});});
+  const run=L.marker(pointAt(0),{zIndexOffset:1000,keyboard:false,icon:L.divIcon({className:'',html:'<div class="m-run"><div class="d"></div><div class="lbl"></div></div>',iconSize:[26,26],iconAnchor:[13,13]})}).addTo(map);
+  M={map,done,run,spotMarkers,me:null,sel:M&&M.sel||nextSpotId(),full};
+  const focus=()=>{const sel=spotById(M.sel),pts=[pointAt(kmAt(now()))];if(sel)pts.push([sel.lat,sel.lon]);const lo=locById(S.loc);pts.push([lo.lat,lo.lon]);
+    map.fitBounds(L.latLngBounds(pts),{padding:[50,50],maxZoom:15});};
+  const zc=()=>map.getContainer().classList.toggle('z-low',map.getZoom()<13);map.on('zoomend',zc);
+  focus();zc();
+  $('#mRun').onclick=()=>map.setView(run.getLatLng(),Math.max(map.getZoom(),14));
+  $('#mAll').onclick=()=>map.fitBounds(full.getBounds(),{padding:[20,20]});
+  $('#mMe').onclick=locateMe;
+  mapTick();mapInfo(M.sel);}
+function mapTick(){if(!M||!document.getElementById('map'))return;
+  const t=now(),k=kmAt(t),p=pointAt(k);
+  M.run.setLatLng(p);const lbl=M.run.getElement()&&M.run.getElement().querySelector('.lbl');
+  if(lbl)lbl.textContent=t<cross()?'Start '+hm(cross()):k>=FULL-0.001?'Finished':`≈ km ${k.toFixed(1)}`;
+  M.done.setLatLngs(lineUpTo(k));
+  spots().forEach(s=>{const el=M.spotMarkers[s.id]&&M.spotMarkers[s.id].getElement();if(el){const d=el.firstChild;d.classList.toggle('passed',s.km<=k);d.classList.toggle('sel',s.id===M.sel);}});}
+function nextSpotId(){const k=kmAt(now());const s=spots().find(x=>x.km>k);return s?s.id:'finish';}
+function mapInfo(id){const box=$('#mapInfo');if(!box)return;const s=spotById(id);if(!s)return;
+  const t=now(),see=eta(s.km),k=kmAt(t),loc=locById(S.loc),passed=s.km<=k;
+  const waiting=loc.spot&&eta(loc.spot.km)>=t&&loc.spot.km<s.km,dep=waiting?eta(loc.spot.km)+MIN:t;
+  const tr=s.id===loc.id?null:trip(fromOf(loc),s),arr=tr?dep+tr.min*MIN:t,slack=(see-arr)/MIN,[c,l]=status(slack);
+  const st=stById[s.st];
+  box.innerHTML=`<div class="runner-top"><span class="eyebrow">Spot ${s.n} · km ${kmTxt(s.km)} · ${esc(s.town)}</span>${passed?'<span class="pill bad">Passed</span>':tr?`<span class="pill ${c}">${l}${c!=='bad'?' +'+Math.round(slack):''}</span>`:'<span class="pill good">You are here</span>'}</div>
+    <h2>${esc(s.name)}</h2>
+    <p>${passed?`${esc(runnerName())} passed here ≈ ${hm(see)}.`:`${esc(runnerName())} due ≈ <b class="mono">${hm(see)}</b> (${inMin(see-t)}).`}${tr&&!passed?` From ${esc(loc.label)} you'd arrive ≈ <b class="mono">${hm(arr)}</b> leaving ${waiting?'after they pass you at '+hm(dep):'now'}.`:''}</p>
+    <p class="small muted">${esc(s.note)} Nearest station: ${esc(st.name)}, ${s.walk} min walk.</p>
+    <div class="btns">${navButtons(s,tr,['primary',''])}<a class="btn block" href="${gPin(s.lat,s.lon)}" target="_blank" rel="noopener">Open pin</a>
+      ${s.id===loc.id?'':`<button class="btn block" data-act="arrived" data-id="${s.id}">I'm here</button>`}</div>`;}
+function stationInfo(id){const box=$('#mapInfo');if(!box)return;const s=stById[id];const served=spots().filter(x=>x.st===id);
+  box.innerHTML=`<span class="eyebrow">Train station</span><h2>${esc(s.name)}</h2>
+    <p class="small muted">About ${s.ride} min from Nice Ville on a stopping TER. ${served.length?'Closest station for: '+served.map(x=>esc(x.name)).join(', ')+'.':''}</p>
+    <div class="btns"><a class="btn primary block" href="${gDir(s.lat,s.lon,'walking')}" target="_blank" rel="noopener">${ICON.walk}Walk here</a>
+    <button class="btn block" data-act="setloc" data-id="st:${s.id}">I'm at this station</button></div>`;}
+function locateMe(){
+  if(!navigator.geolocation){toast('Location is not available in this browser.');return;}
+  navigator.geolocation.getCurrentPosition(pos=>{const ll=[pos.coords.latitude,pos.coords.longitude];
+    if(M&&document.getElementById('map')){if(!M.me)M.me=L.marker(ll,{icon:L.divIcon({className:'',html:'<div class="m-me"></div>',iconSize:[18,18],iconAnchor:[9,9]}),keyboard:false}).addTo(M.map);else M.me.setLatLng(ll);M.map.setView(ll,15);}
+    const n=nearestLoc(ll);toast(`You're nearest ${n.label}.`);},
+    ()=>toast('Location was not shared. Allow it for Safari in Settings › Privacy › Location Services, or pick your spot by hand.'),{enableHighAccuracy:true,timeout:10000});}
+function dist(a,b){const k=Math.cos(a[0]*Math.PI/180);return Math.hypot((a[0]-b[0])*111,(a[1]-b[1])*111*k);}
+function nearestLoc(ll){return locations().reduce((a,l)=>dist(ll,[l.lat,l.lon])<dist(ll,[a.lat,a.lon])?l:a);}
+
+/* ---------- plan ---------- */
 function planView(){
-  const p=bestPlan(S.planFrom),loc=p.loc;
-  let n=0;const steps=[];
-  if(p.seed)steps.push(`<li class="step"><span class="n">${++n}</span><div><b>${esc(p.seed.spot.name)}</b> <span class="t">≈ ${hm(p.seed.see)}</span><div class="small muted">Be there by ${hm(p.seed.see-S.buffer*MIN)}. ${esc(p.seed.spot.note)}</div></div></li>`);
+  const p=bestPlan(S.loc);let n=0;const steps=[];
+  if(p.seed)steps.push(`<li class="step"><span class="n">${++n}</span><div class="body"><div><b>${esc(p.seed.spot.name)}</b> <span class="t">≈ ${hm(p.seed.see)}</span></div><p class="small muted">You're here already. ${esc(p.seed.spot.note)}</p></div></li>`);
   p.chain.forEach(c=>{
-    steps.push(`<li class="step go"><span class="n">→</span><div><span class="t">Leave ${hm(c.dep)}</span><div class="small muted">${c.legs.map(esc).join('. ')}. Arrive ≈ ${hm(c.arr)}, ${Math.round(c.slack)} min spare.</div></div></li>`);
-    steps.push(`<li class="step"><span class="n">${++n}</span><div><b>${esc(c.spot.name)}</b> <span class="t">km ${kmTxt(c.spot.km)} · ≈ ${hm(c.see)}</span><div class="small muted">${esc(c.spot.note)}</div></div></li>`);});
-  $('#view').innerHTML=`<section class="card">
-    <h2>Leapfrog plan</h2>
-    <p class="muted small">The most sightings you can make by train from where you are, using the runner's current projection. It updates as you add splits.</p>
-    <div class="field"><label for="pf">Starting from</label><select id="pf">${locations().map(l=>`<option value="${l.id}" ${l.id===S.planFrom?'selected':''}>${esc(l.label)}</option>`).join('')}</select></div>
-    ${steps.length?`<p><b>${n} sighting${n===1?'':'s'}</b> planned.</p><ol class="steps">${steps.join('')}</ol>`:'<p class="muted">From here you cannot get ahead of the runner again. Go to the finish and meet them there.</p>'}
+    steps.push(`<li class="step go"><span class="n">→</span><div class="body"><span class="t">Leave ${hm(c.dep)} · arrive ≈ ${hm(c.arr)} · ${Math.round(c.slack)} min spare</span>
+      <p class="small muted">${c.tr.legs.map(l=>esc(l.txt)).join(' → ')}</p></div></li>`);
+    steps.push(`<li class="step"><span class="n">${++n}</span><div class="body"><div><b>${esc(c.spot.name)}</b> <span class="t">km ${kmTxt(c.spot.km)} · ≈ ${hm(c.see)}</span></div>
+      <p class="small muted">${esc(c.spot.note)}</p><div class="btns">${navButtons(c.spot,c.tr,['primary',''])}</div></div></li>`);});
+  if(p.meet&&(p.seed||p.chain.length)){const m=p.meet,late=m.arr>m.see;
+    steps.push(`<li class="step go"><span class="n">→</span><div class="body"><span class="t">Leave ${hm(m.dep)} · arrive ≈ ${hm(m.arr)}</span><p class="small muted">${m.tr.legs.map(l=>esc(l.txt)).join(' → ')}</p></div></li>`);
+    steps.push(`<li class="step"><span class="n">✓</span><div class="body"><div><b>Meet at the finish</b> <span class="t">they finish ≈ ${hm(m.see)}</span></div>
+      <p class="small muted">${late?`You arrive about ${Math.round((m.arr-m.see)/MIN)} min after they finish, so agree a meeting point beyond the finish area.`:'You should arrive before they finish.'} ${esc(m.spot.note)}</p><div class="btns">${navButtons(m.spot,m.tr,['primary',''])}</div></div></li>`);}
+  const loc=locById(S.loc);
+  $('#view').innerHTML=`<section class="card"><div class="where"><div><span class="eyebrow">Leapfrog plan from</span><b>${esc(loc.label)}</b></div><button class="chip" data-act="where">Change</button></div>
+    ${steps.length?`<p><b>${n} sighting${n===1?'':'s'}</b>${p.meet?' plus meeting at the finish':''} by train, using the current prediction. The plan updates as you add positions.</p><ol class="steps">${steps.join('')}</ol>`
+    :'<p class="empty">From here you cannot get ahead of the runner again. Go to the finish on La Croisette and meet them there.</p>'}
   </section>
   <section class="card info"><h3>Trains on race day</h3><dl>
     <dt>Pass Marathon · €8</dt><dd>Unlimited TER travel between Nice-Riquier and Cannes on Sunday 8 November. Buy it in the SNCF Connect app before you set off.</dd>
     <dt>Runners ride free</dt><dd>A race bib counts as a ticket on the Nice–Cannes line that day.</dd>
-    <dt>Cannes after the race</dt><dd>SNCF controls access to Cannes station after the race and does not guarantee a seat on a given train. Expect queues.</dd>
-    <dt>No bikes or big bags</dt><dd>The race-day rules say bikes, animals and luggage are not allowed on these trains.</dd>
-    <dt>The Cap d'Antibes shortcut</dt><dd>The course loops around the Cap (about km 22 to 31). The train goes straight from Antibes to Juan-les-Pins in about 4 minutes, so you can watch at the port and still beat them to Juan.</dd>
-    <dt>Check departures</dt><dd><a href="https://www.sncf-connect.com" target="_blank" rel="noopener">SNCF Connect ↗</a> · Ride times here are estimates for stopping trains.</dd>
-  </dl></section>`;
-  $('#pf').onchange=e=>{S.planFrom=e.target.value;save();render();};}
+    <dt>The Cap d'Antibes shortcut</dt><dd>The course loops round the Cap from about km 22 to 31. The train goes from Antibes to Juan-les-Pins in about 4 minutes, so you can watch at the port and still be at Juan-les-Pins first.</dd>
+    <dt>Cannes after the race</dt><dd>SNCF controls access to Cannes station after the race and does not guarantee a place on a given train. Expect queues.</dd>
+    <dt>No bikes or big bags</dt><dd>Bikes, animals and luggage are not allowed on these trains on race day.</dd>
+    <dt>Real departures</dt><dd><a href="https://www.sncf-connect.com" target="_blank" rel="noopener">SNCF Connect ↗</a>. Ride times here are estimates for stopping trains.</dd>
+  </dl></section>`;}
 
-function courseView(){
-  const t=now(),rk=kmAt(t);let placed=false;const rows=[];
-  spots().forEach(s=>{
-    if(!placed&&rk<s.km&&t>=cross()){placed=true;rows.push(`<li class="rib runner"><span class="k">${rk.toFixed(1)}</span><span class="pin"></span><span class="body">${esc(S.runner)} now</span></li>`);}
-    const st=stById[s.st],see=eta(s.km);
-    rows.push(`<li class="rib ${s.km<=rk?'passed':''}"><span class="k">${kmTxt(s.km)}</span><span class="pin"></span><span class="body">
-      <b>${esc(s.name)}</b>
-      <span class="meta">${esc(s.town)} · ${s.km<=rk?'passed':'≈'} ${hm(see)}</span>
-      <span class="meta">${esc(st.name)} station + ${s.walk} min walk · <a href="${mapUrl(s.lat,s.lon,s.name)}" target="_blank" rel="noopener">Map ↗</a></span>
-      <span class="meta">${esc(s.note)}</span>
-      <span class="meta">Km <input class="kmedit" data-km="${s.id}" value="${s.km}" inputmode="decimal" aria-label="Km for ${esc(s.name)}"> Walk <input class="kmedit" data-walk="${s.id}" value="${s.walk}" inputmode="numeric" aria-label="Walk minutes for ${esc(s.name)}"></span>
-    </span></li>`);});
-  $('#view').innerHTML=`<section class="card"><h2>The course</h2>
-    <p class="small muted">Seven towns along the coast, about 100 m of climbing, highest point on the Cap d’Antibes. Km positions are estimates except the start, Fort Carré (21.1) and the finish. Correct them from the official map and the plan follows.</p>
-    <ol class="ribbon">${rows.join('')}</ol>
-    <button class="btn ghost" id="resetKm">Reset km and walk times</button></section>`;
-  document.querySelectorAll('[data-km]').forEach(i=>i.onchange=()=>{const v=parseFloat(i.value.replace(',','.'));if(v>=0&&v<=FULL){S.km[i.dataset.km]=v;save();render();}});
-  document.querySelectorAll('[data-walk]').forEach(i=>i.onchange=()=>{const v=parseInt(i.value,10);if(v>=0&&v<120){S.walk[i.dataset.walk]=v;save();render();}});
-  $('#resetKm').onclick=()=>{S.km={};S.walk={};save();render();};}
-
-function setupView(){
+/* ---------- runner / settings ---------- */
+function runnerView(){
   const f=(id,label,val,extra='')=>`<div class="field"><label for="${id}">${label}</label><input id="${id}" value="${esc(val)}" ${extra}></div>`;
-  $('#view').innerHTML=`<section class="card"><h2>Runner</h2><div class="grid2">
-    ${f('runner','Name',S.runner)}${f('bib','Bib number',S.bib,'inputmode="numeric"')}
-    ${f('target','Target finish (h:mm:ss)',S.target)}${f('gun','Start gun (hh:mm)',S.gun)}
-    ${f('delay','Minutes to cross the start line',S.delay,'inputmode="numeric"')}${f('slow','Slow-down after last split (%)',S.slow,'inputmode="numeric"')}
-    </div>${f('tracking','Live tracking link',S.tracking,'inputmode="url"')}
-    <p class="small muted">Target pace: ${pace(targetPace())}. The main field starts at 08:03; runners further back can take several minutes to reach the line.</p></section>
-  <section class="card"><h2>You</h2><div class="grid2">
-    ${f('headway','Minutes between trains',S.headway,'inputmode="numeric"')}${f('buffer','Spare minutes you want',S.buffer,'inputmode="numeric"')}
-    </div><label class="check"><input type="checkbox" id="conservative" ${S.conservative?'checked':''}> Assume I just missed a train (safer)</label></section>
-  <section class="card"><h2>Reset</h2><div class="btns">
-    <button class="btn" id="clearSplits">Clear splits</button><button class="btn" id="resetAll">Reset everything</button></div>
-    <p class="small muted" id="msg" role="status"></p>
-    <p class="small muted">Everything is saved on this phone only.</p></section>`;
-  ['runner','bib','target','gun','delay','slow','tracking','headway','buffer'].forEach(id=>{$('#'+id).onchange=e=>{S[id]=e.target.value.trim();save();header();flash('Saved.');};});
-  $('#conservative').onchange=e=>{S.conservative=e.target.checked;save();flash('Saved.');};
-  $('#clearSplits').onclick=()=>{S.splits=[];save();flash('Splits cleared.');};
-  let armed=false;$('#resetAll').onclick=e=>{if(!armed){armed=true;e.target.textContent='Tap again to reset';return;}
-    S=Object.assign({},DEFAULTS,{km:{},walk:{},splits:[]});save();render();};}
+  const sp=S.splits.slice().sort((a,b)=>a.km-b.km);
+  $('#view').innerHTML=`<section class="card"><h2>Runner</h2>
+    <div class="grid2">${f('runner','Name',S.runner,'placeholder="e.g. Sam" autocomplete="off"')}${f('bib','Bib number',S.bib,'inputmode="numeric"')}</div>
+    <div><span class="lbl">Target finish time</span><div class="grid2">${f('th','Hours',S.th,'type="number" min="2" max="7" inputmode="numeric"')}${f('tm','Minutes',S.tm,'type="number" min="0" max="59" inputmode="numeric"')}</div>
+    <p class="small muted" id="tpace">Target pace ${pace(targetPace())} per km.</p></div>
+    <div class="grid2">${f('gun','Start gun',S.gun,'type="time"')}${f('delay','Minutes to cross start',S.delay,'type="number" min="0" max="40" inputmode="numeric"')}</div>
+    <p class="small muted">Elites start at 08:00 and the main field at 08:03. Runners further back can take several minutes to cross the line.</p>
+    ${f('tracking','Official live tracking link',S.tracking,'type="url" inputmode="url"')}
+  </section>
+  <section class="card"><div class="runner-top"><h2>Positions</h2><button class="btn primary" data-act="split">Add position</button></div>
+    ${sp.length?`<ul class="splits">${sp.map(s=>`<li><span class="mono">km ${kmTxt(s.km)}</span><span class="mono">${hm(s.t)} · ${fmtDur(s.t-cross())}</span><button class="x" data-del="${s.km}" aria-label="Delete km ${kmTxt(s.km)}">Delete</button></li>`).join('')}</ul>`
+      :'<p class="empty">None yet. Add one from the official tracking, or tap “I just saw them” at a spot. Predictions then follow their real pace.</p>'}
+    ${f('slow','Expected slow-down after the last position (%)',S.slow,'type="number" min="0" max="30" inputmode="numeric"')}
+  </section>
+  <section class="card"><h2>Trains</h2>
+    <div class="grid2">${f('headway','Minutes between trains',S.headway,'type="number" min="5" max="60" inputmode="numeric"')}${f('buffer','Spare minutes you want',S.buffer,'type="number" min="0" max="30" inputmode="numeric"')}</div>
+    <label class="check"><input type="checkbox" id="conservative" ${S.conservative?'checked':''}> Assume I just missed a train</label>
+  </section>
+  <section class="card"><h2>Rehearsal</h2><p class="small muted">Try the app at any time on race day. The slider appears at the top of the screen.</p>
+    <label class="check"><input type="checkbox" id="simOn" ${simActive()?'checked':''}> Rehearsal mode</label></section>
+  <details class="card"><summary>Adjust spots</summary>
+    <p class="small muted">Distances come from the course routed along the seafront roads, calibrated to the official Fort Carré halfway point. Correct any km or walk time from the official map.</p>
+    <div style="overflow-x:auto"><table class="adj"><tbody>${spots().map(s=>`<tr><td>${s.n}. ${esc(s.name)}</td><td>km <input data-km="${s.id}" value="${kmTxt(s.km)}" inputmode="decimal" aria-label="Km for ${esc(s.name)}"></td><td>walk <input data-walk="${s.id}" value="${s.walk}" inputmode="numeric" aria-label="Walk minutes for ${esc(s.name)}"></td></tr>`).join('')}</tbody></table></div>
+    <button class="btn" id="resetKm" type="button">Reset spots</button></details>
+  <section class="card"><h3>Start over</h3><p class="small muted">Everything is saved on this phone only.</p>
+    <div class="btns"><button class="btn" id="clearSplits" type="button">Clear positions</button><button class="btn" id="resetAll" type="button">Reset everything</button></div></section>`;
+  ['runner','bib','tracking'].forEach(id=>$('#'+id).onchange=e=>{S[id]=e.target.value.trim();save();toast('Saved');});
+  [['th',2,7],['tm',0,59],['delay',0,40],['slow',0,30],['headway',5,60],['buffer',0,30]].forEach(([id,lo,hi])=>$('#'+id).onchange=e=>{
+    const v=Math.round(+e.target.value);if(isNaN(v)||v<lo||v>hi){toast(`Enter a number from ${lo} to ${hi}.`);e.target.value=S[id];return;}S[id]=v;save();toast('Saved');header();const tp=$('#tpace');if(tp)tp.textContent=`Target pace ${pace(targetPace())} per km.`;});
+  $('#gun').onchange=e=>{if(!/^\d{2}:\d{2}/.test(e.target.value)){toast('Enter the start time, e.g. 08:03.');return;}S.gun=e.target.value.slice(0,5);save();toast('Saved');};
+  $('#conservative').onchange=e=>{S.conservative=e.target.checked;save();toast('Saved');};
+  $('#simOn').onchange=e=>{S.simOn=e.target.checked;save();header();toast(e.target.checked?'Rehearsal on: drag the slider at the top':'Live race time');};
+  $$('[data-del]').forEach(b=>b.onclick=()=>{S.splits=S.splits.filter(s=>String(s.km)!==b.dataset.del);save();render();toast('Position deleted');});
+  $$('[data-km]').forEach(i=>i.onchange=()=>{const v=parseFloat(i.value.replace(',','.'));if(v>=0&&v<=FULL){S.km[i.dataset.km]=v;save();toast('Saved');}else toast('Km must be between 0 and 42.2.');});
+  $$('[data-walk]').forEach(i=>i.onchange=()=>{const v=parseInt(i.value,10);if(v>=0&&v<120){S.walk[i.dataset.walk]=v;save();toast('Saved');}else toast('Walk must be 0–120 min.');});
+  $('#resetKm').onclick=()=>{S.km={};S.walk={};save();render();toast('Spots reset');};
+  $('#clearSplits').onclick=()=>{S.splits=[];save();render();toast('Positions cleared');};
+  let armed=false;$('#resetAll').onclick=e=>{if(!armed){armed=true;e.target.textContent='Tap again to reset';return;}S=Object.assign({},DEFAULTS,{km:{},walk:{},splits:[]});save();render();toast('Everything reset');};}
 
-function render(){
-  const v=view();document.querySelectorAll('nav.tabs a').forEach(a=>a.setAttribute('aria-current',a.dataset.v===v?'page':'false'));
-  header();({now:nowView,plan:planView,course:courseView,setup:setupView})[v]();
-  if(flashMsg&&$('#msg'))$('#msg').textContent=flashMsg;}
+/* ---------- sheets ---------- */
+function openSheet(html,after){const d=$('#sheet');$('#sheetIn').innerHTML=html;if(typeof d.showModal==='function'){if(!d.open)d.showModal();}else d.setAttribute('open','');
+  $$('#sheetIn [data-close]').forEach(b=>b.onclick=closeSheet);if(after)after();}
+function closeSheet(){const d=$('#sheet');if(d.open&&d.close)d.close();else d.removeAttribute('open');}
+function whereSheet(){
+  const cur=S.loc,item=l=>`<li><button data-pick="${l.id}" aria-current="${l.id===cur}"><span>${esc(l.label)}</span><span class="k">${esc(l.sub)}</span></button></li>`;
+  const ls=locations();
+  openSheet(`<div class="sheet-head"><h2>Where are you?</h2><button class="close" data-close aria-label="Close">✕</button></div>
+    <button class="btn primary" id="useLoc">${ICON.nav}Use my location</button>
+    <ul class="picklist"><li class="group">Viewing spots</li>${ls.filter(l=>l.spot).map(item).join('')}<li class="group">Stations</li>${ls.filter(l=>!l.spot).map(item).join('')}</ul>`,()=>{
+    $$('[data-pick]').forEach(b=>b.onclick=()=>{setLoc(b.dataset.pick);closeSheet();});
+    $('#useLoc').onclick=()=>{if(!navigator.geolocation){toast('Location is not available here. Pick from the list.');return;}
+      navigator.geolocation.getCurrentPosition(pos=>{const n=nearestLoc([pos.coords.latitude,pos.coords.longitude]);setLoc(n.id);closeSheet();},
+        ()=>toast('Location was not shared. Pick from the list instead.'),{enableHighAccuracy:true,timeout:10000});};});}
+function setLoc(id){S.loc=id;save();render();toast(`Location: ${locById(id).label}`);}
 
-$('#simOn').onchange=e=>{S.simOn=e.target.checked;if(S.sim==null)S.sim=130;save();render();};
-$('#simT').oninput=e=>{S.sim=+e.target.value;S.simOn=true;save();flashMsg='';
-  const v=view();if(v==='now'||v==='plan'||v==='course')render();else header();};
-window.addEventListener('hashchange',()=>{flashMsg='';render();window.scrollTo(0,0);});
-setInterval(()=>{const a=document.activeElement;if(a&&(a.tagName==='INPUT'||a.tagName==='SELECT'))return header();
-  if(simActive())header();else if(view()==='setup')header();else render();},15000);
-setInterval(header,1000);
+let splitMode='chip',splitKm=null;
+function splitSheet(){
+  const k=kmAt(now()),preset=[5,10,15,20,21.1,25,30,35,40];
+  openSheet(`<div class="sheet-head"><h2>Update position</h2><button class="close" data-close aria-label="Close">✕</button></div>
+    <p class="small muted">Copy a split from the official tracking. Chip time is the runner's own race time; clock time is the time of day they passed.</p>
+    <div><span class="lbl">Distance (km)</span><div class="kms" id="kms">${preset.map(x=>`<button type="button" data-k="${x}" aria-pressed="${splitKm===x}">${x}</button>`).join('')}</div></div>
+    <div class="field"><label for="kmIn">Or type km</label><input id="kmIn" inputmode="decimal" placeholder="${k.toFixed(1)}" value="${splitKm!=null&&!preset.includes(splitKm)?splitKm:''}"></div>
+    <div class="seg" role="group" aria-label="Time type"><button type="button" data-m="chip" aria-pressed="${splitMode==='chip'}">Chip time</button><button type="button" data-m="clock" aria-pressed="${splitMode==='clock'}">Clock time</button></div>
+    <div id="tChip" class="grid3" ${splitMode==='chip'?'':'hidden'}>
+      <div class="field"><label for="ch">h</label><input id="ch" type="number" min="0" max="7" inputmode="numeric" placeholder="1"></div>
+      <div class="field"><label for="cm">min</label><input id="cm" type="number" min="0" max="59" inputmode="numeric" placeholder="52"></div>
+      <div class="field"><label for="cs">sec</label><input id="cs" type="number" min="0" max="59" inputmode="numeric" placeholder="0"></div></div>
+    <div id="tClock" class="field" ${splitMode==='clock'?'':'hidden'}><label for="ck">Clock time</label><input id="ck" type="time" value="${hm(now())}"></div>
+    <p class="small" id="splitErr" role="alert" style="color:var(--bad)"></p>
+    <button class="btn primary" id="saveSplit" type="button">Save position</button>`,()=>{
+    $$('#kms [data-k]').forEach(b=>b.onclick=()=>{splitKm=+b.dataset.k;$('#kmIn').value='';$$('#kms [data-k]').forEach(x=>x.setAttribute('aria-pressed',x===b));});
+    $('#kmIn').oninput=()=>{splitKm=null;$$('#kms [data-k]').forEach(x=>x.setAttribute('aria-pressed','false'));};
+    $$('[data-m]').forEach(b=>b.onclick=()=>{splitMode=b.dataset.m;$$('[data-m]').forEach(x=>x.setAttribute('aria-pressed',x===b));$('#tChip').hidden=splitMode!=='chip';$('#tClock').hidden=splitMode!=='clock';});
+    $('#saveSplit').onclick=()=>{const err=m=>$('#splitErr').textContent=m;
+      const km=$('#kmIn').value.trim()?parseFloat($('#kmIn').value.replace(',','.')):splitKm;
+      if(!(km>0&&km<=FULL))return err('Choose or type a distance between 0 and 42.2 km.');
+      let t;if(splitMode==='chip'){const h=+$('#ch').value||0,m=+$('#cm').value||0,s=+$('#cs').value||0;if(!(h||m))return err('Enter the chip time (hours and minutes).');if(m>59||s>59)return err('Minutes and seconds go up to 59.');t=cross()+((h*60+m)*60+s)*1000;}
+      else{const v=$('#ck').value;if(!v)return err('Enter the clock time.');t=at(v);}
+      const r=addSplit(km,t);if(r)return err(r);closeSheet();toast(`Saved km ${kmTxt(km)} at ${hm(t)}. Predictions updated.`);splitKm=null;};});}
+
+/* Validate and store a position. Returns an error message or ''. */
+function addSplit(km,t){
+  const others=S.splits.filter(s=>Math.abs(s.km-km)>0.05),pts=[{km:0,t:cross()}].concat(others).sort((a,b)=>a.km-b.km);
+  let prev=pts[0],next=null;for(const p of pts){if(p.km<km)prev=p;else if(p.km>km&&!next)next=p;}
+  if(t<=prev.t)return`That time is before km ${kmTxt(prev.km)} (${hm(prev.t)}). Check the time or the start settings.`;
+  if(next&&t>=next.t)return`That time is after km ${kmTxt(next.km)} (${hm(next.t)}).`;
+  const pc=(t-prev.t)/(km-prev.km)/1000;if(pc<150||pc>900)return`That works out at ${pace(pc*1000)} per km since km ${kmTxt(prev.km)}, which looks wrong. Check the km and time.`;
+  S.splits=others.concat([{km,t}]);save();render();return'';}
+
+let seenArmed=0;
+function seen(){const loc=locById(S.loc);if(!loc.spot){toast('Choose the spot you are at first.');whereSheet();return;}
+  const t=now(),s=loc.spot;
+  if(s.km===0){const d=Math.round((t-at(S.gun))/MIN);if(d<0||d>40){toast('That is outside the start window.');return;}S.delay=d;save();render();toast(`Start-line crossing set to ${d} min after the gun.`);return;}
+  const diff=(t-eta(s.km))/MIN;
+  if(Math.abs(diff)>20&&Date.now()-seenArmed>6000){seenArmed=Date.now();toast(`That's ${Math.round(Math.abs(diff))} min ${diff>0?'later':'earlier'} than predicted. Tap again to confirm.`);return;}
+  seenArmed=0;const r=addSplit(s.km,t);toast(r||`Logged km ${kmTxt(s.km)} at ${hm(t)}. Predictions updated.`);}
+
+/* ---------- events & render ---------- */
+document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act;
+  if(a==='where')whereSheet();else if(a==='split')splitSheet();else if(a==='seen')seen();
+  else if(a==='arrived'||a==='setloc')setLoc(b.dataset.id);
+  else if(a==='spot'){if(M)M.sel=b.dataset.id;else M={sel:b.dataset.id};location.hash='#map';}});
+$('#sheet').addEventListener('click',e=>{if(e.target===$('#sheet'))closeSheet();});
+$('#simT').oninput=e=>{S.sim=+e.target.value;S.simOn=true;save();header();tick();};
+$('#rhOff').onclick=()=>{S.simOn=false;save();render();toast('Live race time');};
+
+function render(){const v=view();$$('nav.tabs a').forEach(a=>a.setAttribute('aria-current',a.dataset.v===v?'page':'false'));header();
+  if(v!=='map'&&M&&M.map){M.map.remove();M={sel:M.sel};}
+  ({live:liveView,map:mapView,plan:planView,runner:runnerView})[v]();}
+function tick(){const v=view(),busy=$('#sheet').open||(document.activeElement&&/INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName)&&document.activeElement.id!=='simT');
+  if(v==='map'){mapTick();if(M&&M.sel)mapInfo(M.sel);}else if(v!=='runner'&&!busy){const y=scrollY;({live:liveView,plan:planView})[v]();scrollTo(0,y);}}
+window.addEventListener('hashchange',()=>{render();scrollTo(0,0);});
+setInterval(header,1000);setInterval(()=>{if(!simActive())tick();},15000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden){header();tick();}});
+if(!S.runner&&!location.hash)location.hash='#live';
 render();
 })();
 </script>
