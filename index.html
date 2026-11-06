@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Race Spotter">
+<meta name="theme-color" content="#0B6A86">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>Riviera Race Spotter</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow column, a sticky race-clock bar, the course as a vertical coast ribbon (km markers like roadside posts), tabs at the bottom. */
+:root{
+  --bg:#EEF4F5; --surface:#FFFFFF; --ink:#0F2430; --muted:#566C77; --line:#D3DFE3;
+  --sea:#0B6A86; --sea-soft:#DCEEF3; --sun:#E39A12; --sun-ink:#3A2500;
+  --good:#1D8350; --warn:#A86A12; --bad:#BC3A33;
+  --f-display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#09161D; --surface:#11222B; --ink:#E4EDF0; --muted:#8EA3AD; --line:#243A47; --sea:#4DB2D0; --sea-soft:#14323E; --sun:#F2B642; --sun-ink:#2B1B00;
+  --good:#4CC488; --warn:#E3A945; --bad:#EE6B62; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#09161D; --surface:#11222B; --ink:#E4EDF0; --muted:#8EA3AD;
+  --line:#243A47; --sea:#4DB2D0; --sea-soft:#14323E; --sun:#F2B642; --sun-ink:#2B1B00;
+  --good:#4CC488; --warn:#E3A945; --bad:#EE6B62; color-scheme:dark}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.45;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 96px;max-width:640px;margin:0 auto}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+h1,h2,h3{font-family:var(--f-display);font-weight:700;letter-spacing:.01em;text-wrap:balance;margin:0}
+h2{font-size:1.5rem}
+h3{font-size:1.15rem}
+.mono,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.small{font-size:.85rem}
+a{color:var(--sea)}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--sea);outline-offset:2px}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:12px 10px;border-bottom:1px solid var(--line);display:grid;gap:8px}
+.top-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{font-family:var(--f-display);font-size:1.05rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.clock{font-family:var(--f-mono);font-size:1.6rem;line-height:1}
+.sim{display:flex;align-items:center;gap:10px;background:var(--sea-soft);border-radius:var(--r);padding:6px 10px;font-size:.85rem}
+.sim input[type=range]{flex:1;min-width:0;accent-color:var(--sea)}
+.sim label{white-space:nowrap}
+
+/* panels */
+main{display:grid;gap:16px;padding-top:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:grid;gap:12px;min-width:0}
+.eyebrow{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.1em;font-size:.85rem;color:var(--muted)}
+
+/* runner hero */
+.runner-km{font-family:var(--f-display);font-size:3.4rem;line-height:.9;font-weight:700}
+.runner-km small{font-size:1.2rem;color:var(--muted);font-weight:600}
+.statline{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.92rem}
+.statline b{font-family:var(--f-mono);font-weight:500}
+.bar{position:relative;height:34px;margin-top:4px}
+.bar .track{position:absolute;left:0;right:0;top:15px;height:4px;border-radius:2px;background:var(--line)}
+.bar .done{position:absolute;left:0;top:15px;height:4px;border-radius:2px;background:var(--sea)}
+.bar .tick{position:absolute;top:10px;width:2px;height:14px;background:var(--muted);opacity:.5}
+.bar .dot{position:absolute;top:6px;width:22px;height:22px;margin-left:-11px;border-radius:50%;background:var(--sun);border:3px solid var(--surface);box-shadow:0 0 0 1px var(--sun)}
+.bar-labels{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted)}
+
+.btns{display:flex;flex-wrap:wrap;gap:8px}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:10px 16px;font-weight:700;cursor:pointer;min-height:44px}
+.btn.primary{background:var(--sea);border-color:var(--sea);color:var(--surface)}
+.btn.sun{background:var(--sun);border-color:var(--sun);color:var(--sun-ink)}
+.btn.ghost{background:transparent}
+.btn:active{transform:translateY(1px)}
+
+.field{display:grid;gap:4px;min-width:0}
+.field label{font-size:.85rem;color:var(--muted);font-weight:700}
+.field input,.field select{border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:10px 12px;min-height:44px;width:100%}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.check{display:flex;gap:10px;align-items:center}
+.check input{width:22px;height:22px;accent-color:var(--sea)}
+
+/* options list */
+.opts{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.opt{display:grid;grid-template-columns:auto 1fr auto;gap:4px 12px;align-items:start;padding:12px;border-radius:var(--r);border:1px solid var(--line);background:var(--bg)}
+.opt.miss{opacity:.55}
+.opt .km{font-family:var(--f-mono);font-size:.85rem;color:var(--muted);padding-top:2px;min-width:3.6em}
+.opt .nm{font-weight:700;min-width:0}
+.opt .how{grid-column:2 / 4;font-size:.88rem;color:var(--muted)}
+.pill{font-family:var(--f-display);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:.85rem;border-radius:999px;padding:3px 10px;white-space:nowrap;border:1.5px solid currentColor}
+.pill.good{color:var(--good)} .pill.warn{color:var(--warn)} .pill.bad{color:var(--bad)}
+.waiting{background:var(--sun);color:var(--sun-ink);border-radius:var(--r);padding:12px 14px;font-weight:700}
+
+/* plan steps */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.step{display:grid;grid-template-columns:28px 1fr;gap:12px;position:relative;padding-bottom:16px}
+.step:not(:last-child)::before{content:"";position:absolute;left:13px;top:28px;bottom:0;width:2px;background:var(--line)}
+.step .n{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-display);font-weight:700;background:var(--sun);color:var(--sun-ink)}
+.step.go .n{background:var(--sea-soft);color:var(--sea);font-size:.9rem}
+.step .t{font-family:var(--f-mono);font-size:.9rem}
+
+/* course ribbon */
+.ribbon{list-style:none;margin:0;padding:0;position:relative}
+.ribbon::before{content:"";position:absolute;left:44px;top:8px;bottom:8px;width:4px;border-radius:2px;background:var(--sea-soft)}
+.rib{display:grid;grid-template-columns:36px 20px 1fr;gap:8px;align-items:start;padding:8px 0;position:relative}
+.rib .k{font-family:var(--f-mono);font-size:.82rem;color:var(--muted);text-align:right;padding-top:2px}
+.rib .pin{width:14px;height:14px;margin:4px 0 0 1px;border-radius:50%;background:var(--surface);border:3px solid var(--sea);position:relative;z-index:1}
+.rib.passed .pin{background:var(--sea)}
+.rib .body{display:grid;gap:2px;min-width:0}
+.rib .meta{font-size:.85rem;color:var(--muted)}
+.rib.runner .pin{width:20px;height:20px;margin:1px 0 0 -2px;background:var(--sun);border-color:var(--surface);box-shadow:0 0 0 1px var(--sun)}
+.rib.runner .body{font-weight:700;color:var(--ink)}
+.kmedit{width:5.2em;border:1px solid var(--line);border-radius:6px;background:var(--bg);padding:4px 6px;font-family:var(--f-mono);font-size:.85rem}
+
+.splits{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.splits li{display:flex;justify-content:space-between;align-items:center;gap:8px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.x{border:0;background:none;color:var(--bad);font-weight:700;cursor:pointer;min-height:36px;padding:0 8px}
+
+.note{border-left:3px solid var(--sea);padding:2px 0 2px 12px;font-size:.92rem}
+.info dt{font-weight:700}
+.info dd{margin:0 0 10px;color:var(--muted)}
+
+/* tabs */
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--surface);border-top:1px solid var(--line);
+  display:flex;justify-content:center;
+  padding-bottom:env(safe-area-inset-bottom,0px);padding-left:max(8px,env(safe-area-inset-left,0px));padding-right:max(8px,env(safe-area-inset-right,0px))}
+nav.tabs a{flex:1;max-width:160px;text-align:center;padding:12px 4px 10px;font-family:var(--f-display);font-weight:700;text-transform:uppercase;letter-spacing:.08em;text-decoration:none;color:var(--muted);border-top:3px solid transparent}
+nav.tabs a[aria-current="page"]{color:var(--sea);border-top-color:var(--sea)}
+@media (prefers-reduced-motion:no-preference){.bar .dot,.bar .done{transition:left .6s ease,width .6s ease}}
+</style>
+
+</head>
+<body>
+<header class="top">
+  <div class="top-row">
+    <span class="brand">Nice → Cannes · 8 Nov</span>
+    <span class="clock" id="clock">--:--</span>
+  </div>
+  <div class="sim" id="simbar">
+    <label class="check"><input type="checkbox" id="simOn"> Rehearse</label>
+    <input type="range" id="simT" min="0" max="440" step="5" aria-label="Rehearsal time">
+    <span class="mono" id="simLbl"></span>
+  </div>
+</header>
+
+<main id="view"></main>
+
+<nav class="tabs" aria-label="Sections">
+  <a href="#now" data-v="now">Now</a>
+  <a href="#plan" data-v="plan">Plan</a>
+  <a href="#course" data-v="course">Course</a>
+  <a href="#setup" data-v="setup">Setup</a>
+</nav>
+
+<script>
+(function(){
+"use strict";
+const TZ='Europe/Paris', RACE_DATE='2026-11-08', OFFSET='+01:00', FULL=42.195;
+
+/* Train stations on the Nice–Cannes line, in race direction. ride = approx. minutes from Nice Ville on a stopping TER. */
+const STATIONS=[
+ {id:'nice',name:'Nice Ville',ride:0,lat:43.7047,lon:7.2618},
+ {id:'staug',name:'Nice Saint-Augustin',ride:5,lat:43.6731,lon:7.2148},
+ {id:'stl',name:'Saint-Laurent-du-Var',ride:8,lat:43.6652,lon:7.1932},
+ {id:'cros',name:'Cros-de-Cagnes',ride:11,lat:43.6598,lon:7.1690},
+ {id:'cagnes',name:'Cagnes-sur-Mer',ride:14,lat:43.6602,lon:7.1487},
+ {id:'vlp',name:'Villeneuve-Loubet-Plage',ride:17,lat:43.6391,lon:7.1302},
+ {id:'biot',name:'Biot',ride:21,lat:43.6124,lon:7.1206},
+ {id:'antibes',name:'Antibes',ride:25,lat:43.5864,lon:7.1199},
+ {id:'juan',name:'Juan-les-Pins',ride:29,lat:43.5701,lon:7.1102},
+ {id:'gj',name:'Golfe-Juan–Vallauris',ride:32,lat:43.5672,lon:7.0763},
+ {id:'cannes',name:'Cannes',ride:39,lat:43.5534,lon:7.0196}
+];
+/* Viewing spots. km values are approximate except start, Fort Carré relay (21.1) and finish. walk = minutes from station to the course. */
+const SPOTS=[
+ {id:'start',name:'Start · Promenade des Anglais',town:'Nice',km:0,st:'nice',walk:15,lat:43.6951,lon:7.2668,note:'By the Théâtre de Verdure. Handisport 07:57, elites 08:00, main field 08:03. Stand west of the start pens.'},
+ {id:'magnan',name:'Promenade · Magnan',town:'Nice',km:2.5,st:'nice',walk:22,lat:43.6889,lon:7.2445,note:'Tram L2 (Magnan stop) is closer than the train.'},
+ {id:'airport',name:'Promenade · airport end',town:'Nice',km:6.5,st:'staug',walk:12,lat:43.6687,lon:7.2140,note:'Wide promenade, easy to see runners.'},
+ {id:'stlaurent',name:'Saint-Laurent seafront',town:'Saint-Laurent-du-Var',km:8.7,st:'stl',walk:8,lat:43.6606,lon:7.1937,note:'Just after the Var bridge, near Cap 3000.'},
+ {id:'cros',name:'Cros-de-Cagnes seafront',town:'Cagnes-sur-Mer',km:11.2,st:'cros',walk:4,lat:43.6573,lon:7.1705,note:'Station is a short walk from the seafront road.'},
+ {id:'hippo',name:'Hippodrome seafront',town:'Cagnes-sur-Mer',km:13,st:'cagnes',walk:12,lat:43.6538,lon:7.1550,note:'Long straight, runners visible from far off.'},
+ {id:'baie',name:'Marina Baie des Anges',town:'Villeneuve-Loubet',km:15.8,st:'vlp',walk:6,lat:43.6401,lon:7.1368,note:'The 20 km race finishes nearby (Les Maurettes), so expect crowds.'},
+ {id:'biot',name:'La Brague · Marineland',town:'Biot',km:18.6,st:'biot',walk:5,lat:43.6150,lon:7.1243,note:'Quieter stretch, good for a clear shout.'},
+ {id:'fort',name:'Fort Carré · halfway',town:'Antibes',km:21.1,st:'antibes',walk:10,lat:43.5905,lon:7.1268,note:'Duo relay changeover. Busy and loud.'},
+ {id:'port',name:'Port Vauban',town:'Antibes',km:22.4,st:'antibes',walk:7,lat:43.5838,lon:7.1272,note:'Last easy spot before the Cap d’Antibes loop.'},
+ {id:'salis',name:'Plage de la Salis',town:'Cap d’Antibes',km:24.3,st:'antibes',walk:20,lat:43.5734,lon:7.1311,note:'Climb to La Garoupe high point (~km 27.9) follows.'},
+ {id:'juan',name:'Juan-les-Pins · Pinède',town:'Antibes Juan-les-Pins',km:31,st:'juan',walk:6,lat:43.5677,lon:7.1087,note:'Train cuts straight across the Cap. Best leapfrog of the day.'},
+ {id:'gj',name:'Golfe-Juan old port',town:'Vallauris Golfe-Juan',km:36,st:'gj',walk:4,lat:43.5652,lon:7.0779,note:'Final push begins. Runners appreciate support here.'},
+ {id:'palm',name:'Pointe Croisette · Palm Beach',town:'Cannes',km:39.6,st:'cannes',walk:32,lat:43.5418,lon:7.0389,note:'Long walk from the station; bus or taxi helps.'},
+ {id:'finish',name:'Finish · La Croisette',town:'Cannes',km:FULL,st:'cannes',walk:20,lat:43.5484,lon:7.0306,note:'Opposite the Martinez. Agree a meeting point after the finish area.'}
+];
+const stById=Object.fromEntries(STATIONS.map(s=>[s.id,s]));
+
+const DEFAULTS={runner:'Your runner',bib:'',target:'4:00:00',gun:'08:03',delay:3,slow:3,headway:20,conservative:true,buffer:5,
+  tracking:'https://www.marathon06.com',splits:[],loc:'start',planFrom:'start',km:{},walk:{},sim:null,simOn:null};
+let S=load();
+function load(){try{const v=JSON.parse(localStorage.getItem('rrs')||'null');return Object.assign({},DEFAULTS,v||{});}catch(e){return Object.assign({},DEFAULTS);}}
+function save(){try{localStorage.setItem('rrs',JSON.stringify(S));}catch(e){}}
+
+/* ---------- time helpers (all race times are Paris time) ---------- */
+const fmtHM=new Intl.DateTimeFormat('en-GB',{timeZone:TZ,hour:'2-digit',minute:'2-digit'});
+const fmtHMS=new Intl.DateTimeFormat('en-GB',{timeZone:TZ,hour:'2-digit',minute:'2-digit',second:'2-digit'});
+const hm=t=>fmtHM.format(t);
+function at(hhmm){const p=String(hhmm).trim().split(':');if(p.length<2)return NaN;
+  const s=p.map(x=>x.padStart(2,'0'));while(s.length<3)s.push('00');return Date.parse(`${RACE_DATE}T${s[0]}:${s[1]}:${s[2]}${OFFSET}`);}
+function dur(str){const p=String(str).trim().split(':').map(Number);if(p.some(isNaN))return NaN;
+  if(p.length===3)return((p[0]*60+p[1])*60+p[2])*1000;if(p.length===2)return(p[0]*60+p[1])*1000;return NaN;}
+function fmtDur(ms){const neg=ms<0;ms=Math.abs(ms);const t=Math.round(ms/1000),h=Math.floor(t/3600),m=Math.floor(t%3600/60),s=t%60;
+  return(neg?'-':'')+h+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');}
+function pace(msPerKm){const s=Math.round(msPerKm/1000);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')+'/km';}
+const MIN=60000;
+const kmTxt=k=>k>=FULL?'42.2':String(+(+k).toFixed(1));
+const simBase=at('07:30');
+function now(){return simActive()?simBase+(S.sim??130)*MIN:Date.now();}
+function simActive(){if(S.simOn!==null)return S.simOn;const t=Date.now();return t<at('07:00')||t>at('17:00');}
+
+/* ---------- course data with user overrides ---------- */
+function spots(){return SPOTS.map(s=>Object.assign({},s,{km:S.km[s.id]!=null?+S.km[s.id]:s.km,walk:S.walk[s.id]!=null?+S.walk[s.id]:s.walk})).sort((a,b)=>a.km-b.km);}
+function locations(){return spots().map(s=>({id:s.id,label:`${s.name} (km ${kmTxt(s.km)})`,st:s.st,walk:s.walk,km:s.km,spot:s}))
+  .concat(STATIONS.map(s=>({id:'st:'+s.id,label:`${s.name} station`,st:s.id,walk:0,km:null,spot:null})));}
+function locById(id){return locations().find(l=>l.id===id)||locations()[0];}
+
+/* ---------- runner model ---------- */
+function cross(){return at(S.gun)+(+S.delay||0)*MIN;}
+function targetPace(){const d=dur(S.target);return isNaN(d)?(4*3600000)/FULL:d/FULL;}
+function points(){return [{km:0,t:cross()}].concat(S.splits.slice().sort((a,b)=>a.km-b.km));}
+function livePace(){const p=points(),l=p[p.length-1];return l.km>0?(l.t-cross())/l.km:targetPace();}
+function futurePace(){const p=points(),l=p[p.length-1];return l.km>0?livePace()*(1+(+S.slow||0)/100):targetPace();}
+function eta(km){const p=points();
+  for(let i=1;i<p.length;i++){if(km<=p[i].km){const a=p[i-1],b=p[i];return a.t+(b.t-a.t)*(km-a.km)/(b.km-a.km||1);}}
+  const l=p[p.length-1];return l.t+(km-l.km)*futurePace();}
+function kmAt(t){const p=points();if(t<=p[0].t)return 0;
+  for(let i=1;i<p.length;i++){if(t<=p[i].t){const a=p[i-1],b=p[i];return a.km+(b.km-a.km)*(t-a.t)/(b.t-a.t||1);}}
+  const l=p[p.length-1];return Math.min(FULL,l.km+(t-l.t)/futurePace());}
+
+/* ---------- spectator travel model ---------- */
+function wait(){return S.conservative?+S.headway:+S.headway/2;}
+function trip(from,toSpot){ // returns {min, legs[]}
+  const to=stById[toSpot.st];
+  if(from.st===toSpot.st){const m=(from.walk||0)+toSpot.walk;return{min:m,legs:[`Walk about ${m} min to ${toSpot.name}`]};}
+  const a=stById[from.st],ride=Math.max(2,Math.abs(to.ride-a.ride));
+  const m=(from.walk||0)+wait()+ride+2+toSpot.walk;
+  const legs=[];if(from.walk)legs.push(`Walk ${from.walk} min to ${a.name} station`);
+  legs.push(`Train to ${to.name} (${ride} min ride, allow ${Math.round(wait())} min for the next train)`);
+  legs.push(`Walk ${toSpot.walk} min to the course`);
+  return{min:m,legs};}
+function status(slack){return slack>=+S.buffer?['good','Catch']:slack>=0?['warn','Tight']:['bad','Miss'];}
+
+/* Best sequence of sightings from where you are now (dynamic programming over spots in course order). */
+function bestPlan(fromId){
+  const t0=now(),loc=locById(fromId),list=spots(),rk=kmAt(t0);
+  let depart=t0,seed=null;
+  if(loc.spot&&eta(loc.spot.km)>=t0){seed={spot:loc.spot,see:eta(loc.spot.km)};depart=seed.see+MIN;}
+  const minKm=seed?seed.spot.km:rk;
+  const cand=list.filter(s=>s.km>minKm+0.05&&eta(s.km)>t0);
+  const best=[];
+  cand.forEach((s,j)=>{
+    const see=eta(s.km);let b=null;
+    const consider=(count,minSlack,prev,dep,from)=>{const tr=trip(from,s),arr=dep+tr.min*MIN,slack=(see-arr)/MIN;
+      if(slack<+S.buffer)return;const ms=Math.min(minSlack,slack);
+      if(!b||count>b.count||(count===b.count&&ms>b.minSlack))b={count,minSlack:ms,prev,dep,arr,slack,legs:tr.legs,spot:s,see};};
+    consider((seed?2:1),Infinity,-1,depart,loc);
+    for(let i=0;i<j;i++){const p=best[i];if(!p)continue;
+      consider(p.count+1,p.minSlack,i,p.see+MIN,{st:p.spot.st,walk:p.spot.walk});}
+    best[j]=b;});
+  let end=-1;best.forEach((b,j)=>{if(!b)return;const e=best[end];
+    if(end<0||b.count>e.count||(b.count===e.count&&b.spot.km>e.spot.km)||(b.count===e.count&&b.spot.km===e.spot.km&&b.minSlack>e.minSlack))end=j;});
+  const chain=[];for(let j=end;j>=0;j=best[j].prev)chain.unshift(best[j]);
+  return{seed,chain,loc,rk};}
+
+/* ---------- rendering ---------- */
+const $=s=>document.querySelector(s), esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const mapUrl=(lat,lon,q)=>`https://maps.apple.com/?ll=${lat},${lon}&q=${encodeURIComponent(q)}`;
+function view(){const v=(location.hash||'#now').slice(1);return['now','plan','course','setup'].includes(v)?v:'now';}
+
+function header(){
+  const t=now();$('#clock').textContent=fmtHMS.format(t);
+  const on=simActive();$('#simOn').checked=on;$('#simT').disabled=!on;
+  $('#simT').value=S.sim==null?130:S.sim;$('#simLbl').textContent=on?hm(simBase+(+$('#simT').value)*MIN):'live';
+}
+
+function runnerCard(){
+  const t=now(),k=kmAt(t),fin=eta(FULL),started=t>=cross(),done=k>=FULL;
+  const ticks=[0,10,21.1,30,FULL].map(x=>`<span class="tick" style="left:${x/FULL*100}%"></span>`).join('');
+  const lastSplit=S.splits.length?S.splits.slice().sort((a,b)=>b.km-a.km)[0]:null;
+  const near=spots().reduce((a,s)=>Math.abs(s.km-k)<Math.abs(a.km-k)?s:a);
+  return `<section class="card" aria-label="Runner">
+    <div class="top-row"><span class="eyebrow">${esc(S.runner)}${S.bib?' · bib '+esc(S.bib):''}</span>
+      <a class="small" href="${esc(S.tracking)}" target="_blank" rel="noopener">Official live tracking ↗</a></div>
+    <div class="runner-km">${done?'Finished':started?'≈ km '+k.toFixed(1):'Not started'} ${started&&!done?`<small>near ${esc(near.town)}</small>`:''}</div>
+    <div class="bar" role="img" aria-label="Progress ${Math.round(k/FULL*100)} percent">
+      <span class="track"></span><span class="done" style="width:${k/FULL*100}%"></span>${ticks}
+      <span class="dot" style="left:${k/FULL*100}%"></span></div>
+    <div class="bar-labels"><span>Nice</span><span>Antibes ½</span><span>Cannes</span></div>
+    <div class="statline">
+      <span>Pace <b>${pace(lastSplit?livePace():targetPace())}</b></span>
+      <span>Finish ≈ <b>${hm(fin)}</b> (<b>${fmtDur(fin-cross())}</b>)</span>
+      <span class="muted">${lastSplit?`From split at km ${lastSplit.km} · ${hm(lastSplit.t)}`:'From target time · add a split to correct it'}</span>
+    </div></section>`;}
+
+function nowView(){
+  const t=now(),loc=locById(S.loc),rk=kmAt(t);
+  let depart=t,banner='';
+  if(loc.spot){const see=eta(loc.spot.km);
+    if(see>=t){depart=see+MIN;banner=`<div class="waiting">They reach you at ${esc(loc.spot.name)} ≈ ${hm(see)} (in ${Math.round((see-t)/MIN)} min). Stay here, then pick your next spot below.</div>`;}}
+  const from=loc.spot?{st:loc.st,walk:loc.walk}:{st:loc.st,walk:0};
+  const minKm=loc.spot&&eta(loc.spot.km)>=t?loc.spot.km:rk;
+  let missed=0;
+  const rows=spots().filter(s=>s.km>minKm+0.05&&s.id!==loc.id).map(s=>{
+    const tr=trip(from,s),arr=depart+tr.min*MIN,see=eta(s.km),slack=(see-arr)/MIN,[c,l]=status(slack);
+    if(c==='bad'){missed++;return '';}
+    return `<li class="opt"><span class="km">km ${kmTxt(s.km)}</span>
+      <span class="nm">${esc(s.name)}<br><span class="small muted">${esc(s.town)} · runner ≈ ${hm(see)}</span></span>
+      <span class="pill ${c}">${l}${c!=='bad'?' +'+Math.round(slack):''}</span>
+      <span class="how">Leave ${hm(depart)}, arrive ≈ ${hm(arr)}. ${tr.legs.map(esc).join(' → ')}</span></li>`;}).join('');
+  $('#view').innerHTML=runnerCard()+`
+  <section class="card"><div class="btns">
+    ${loc.spot?`<button class="btn sun" id="seen">I just saw them here</button>`:''}
+    <button class="btn" id="addSplit">Add split from tracking</button>
+    <button class="btn ghost" id="wake">Keep screen awake</button></div>
+    <form id="splitForm" class="grid2" hidden>
+      <div class="field"><label for="sKm">Km</label><input id="sKm" inputmode="decimal" placeholder="21.1"></div>
+      <div class="field"><label for="sT">Chip time (h:mm:ss) or clock (hh:mm)</label><input id="sT" placeholder="1:58:40"></div>
+      <div class="btns"><button class="btn primary" type="submit">Save split</button></div>
+    </form>
+    <p class="small muted" id="msg" role="status"></p></section>
+  <section class="card"><div class="field"><label for="loc">I am at</label>
+    <select id="loc">${locations().map(l=>`<option value="${l.id}" ${l.id===S.loc?'selected':''}>${esc(l.label)}</option>`).join('')}</select></div>
+    ${banner}
+    <h3>Where can I catch them next?</h3>
+    ${rows?`<ul class="opts">${rows}</ul>`:'<p class="muted">You cannot reach any spot ahead of the runner in time. Head for the finish meeting point.</p>'}
+    ${missed?`<p class="small muted">${missed} nearer spot${missed>1?'s are':' is'} out of reach from here.</p>`:''}
+    <p class="small muted">“Catch” leaves at least ${S.buffer} min spare. Times assume a train every ${S.headway} min${S.conservative?' and that you just missed one':''}. Check real departures in SNCF Connect.</p>
+  </section>`+splitsCard();
+  $('#loc').onchange=e=>{S.loc=e.target.value;save();render();};
+  const seen=$('#seen');if(seen)seen.onclick=()=>{addSplit(loc.spot.km,now());flash(`Logged: km ${loc.spot.km} at ${hm(now())}. Projections updated.`);};
+  $('#addSplit').onclick=()=>{$('#splitForm').hidden=!$('#splitForm').hidden;};
+  $('#splitForm').onsubmit=e=>{e.preventDefault();const km=parseFloat($('#sKm').value.replace(',','.')),v=$('#sT').value.trim();
+    if(!(km>0&&km<=FULL)){flash('Enter a km between 0 and 42.195.');return;}
+    let t;const parts=v.split(':');
+    if(parts.length===3)t=cross()+dur(v);else if(parts.length===2)t=at(v);
+    if(!t||isNaN(t)){flash('Enter chip time like 1:58:40, or clock time like 10:05.');return;}
+    addSplit(km,t);flash(`Saved split: km ${km} at ${hm(t)}.`);};
+  $('#wake').onclick=async()=>{try{await navigator.wakeLock.request('screen');flash('Screen will stay on while this page is open.');}catch(e){flash('This browser would not keep the screen on. Set Auto-Lock to Never in Settings › Display.');}};
+  bindSplitDeletes();}
+
+function splitsCard(){
+  if(!S.splits.length)return '';
+  const li=S.splits.slice().sort((a,b)=>a.km-b.km).map((s,i)=>`<li><span class="mono">km ${s.km}</span><span class="mono">${hm(s.t)} · ${fmtDur(s.t-cross())}</span><button class="x" data-del="${s.km}" aria-label="Delete split at km ${s.km}">Delete</button></li>`).join('');
+  return `<section class="card"><h3>Splits</h3><ul class="splits">${li}</ul></section>`;}
+function bindSplitDeletes(){document.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{S.splits=S.splits.filter(s=>String(s.km)!==b.dataset.del);save();render();});}
+function addSplit(km,t){S.splits=S.splits.filter(s=>s.km!==km);S.splits.push({km,t});save();render();}
+let flashMsg='';function flash(m){flashMsg=m;const el=$('#msg');if(el)el.textContent=m;}
+
+function planView(){
+  const p=bestPlan(S.planFrom),loc=p.loc;
+  let n=0;const steps=[];
+  if(p.seed)steps.push(`<li class="step"><span class="n">${++n}</span><div><b>${esc(p.seed.spot.name)}</b> <span class="t">≈ ${hm(p.seed.see)}</span><div class="small muted">Be there by ${hm(p.seed.see-S.buffer*MIN)}. ${esc(p.seed.spot.note)}</div></div></li>`);
+  p.chain.forEach(c=>{
+    steps.push(`<li class="step go"><span class="n">→</span><div><span class="t">Leave ${hm(c.dep)}</span><div class="small muted">${c.legs.map(esc).join('. ')}. Arrive ≈ ${hm(c.arr)}, ${Math.round(c.slack)} min spare.</div></div></li>`);
+    steps.push(`<li class="step"><span class="n">${++n}</span><div><b>${esc(c.spot.name)}</b> <span class="t">km ${kmTxt(c.spot.km)} · ≈ ${hm(c.see)}</span><div class="small muted">${esc(c.spot.note)}</div></div></li>`);});
+  $('#view').innerHTML=`<section class="card">
+    <h2>Leapfrog plan</h2>
+    <p class="muted small">The most sightings you can make by train from where you are, using the runner's current projection. It updates as you add splits.</p>
+    <div class="field"><label for="pf">Starting from</label><select id="pf">${locations().map(l=>`<option value="${l.id}" ${l.id===S.planFrom?'selected':''}>${esc(l.label)}</option>`).join('')}</select></div>
+    ${steps.length?`<p><b>${n} sighting${n===1?'':'s'}</b> planned.</p><ol class="steps">${steps.join('')}</ol>`:'<p class="muted">From here you cannot get ahead of the runner again. Go to the finish and meet them there.</p>'}
+  </section>
+  <section class="card info"><h3>Trains on race day</h3><dl>
+    <dt>Pass Marathon · €8</dt><dd>Unlimited TER travel between Nice-Riquier and Cannes on Sunday 8 November. Buy it in the SNCF Connect app before you set off.</dd>
+    <dt>Runners ride free</dt><dd>A race bib counts as a ticket on the Nice–Cannes line that day.</dd>
+    <dt>Cannes after the race</dt><dd>SNCF controls access to Cannes station after the race and does not guarantee a seat on a given train. Expect queues.</dd>
+    <dt>No bikes or big bags</dt><dd>The race-day rules say bikes, animals and luggage are not allowed on these trains.</dd>
+    <dt>The Cap d'Antibes shortcut</dt><dd>The course loops around the Cap (about km 22 to 31). The train goes straight from Antibes to Juan-les-Pins in about 4 minutes, so you can watch at the port and still beat them to Juan.</dd>
+    <dt>Check departures</dt><dd><a href="https://www.sncf-connect.com" target="_blank" rel="noopener">SNCF Connect ↗</a> · Ride times here are estimates for stopping trains.</dd>
+  </dl></section>`;
+  $('#pf').onchange=e=>{S.planFrom=e.target.value;save();render();};}
+
+function courseView(){
+  const t=now(),rk=kmAt(t);let placed=false;const rows=[];
+  spots().forEach(s=>{
+    if(!placed&&rk<s.km&&t>=cross()){placed=true;rows.push(`<li class="rib runner"><span class="k">${rk.toFixed(1)}</span><span class="pin"></span><span class="body">${esc(S.runner)} now</span></li>`);}
+    const st=stById[s.st],see=eta(s.km);
+    rows.push(`<li class="rib ${s.km<=rk?'passed':''}"><span class="k">${kmTxt(s.km)}</span><span class="pin"></span><span class="body">
+      <b>${esc(s.name)}</b>
+      <span class="meta">${esc(s.town)} · ${s.km<=rk?'passed':'≈'} ${hm(see)}</span>
+      <span class="meta">${esc(st.name)} station + ${s.walk} min walk · <a href="${mapUrl(s.lat,s.lon,s.name)}" target="_blank" rel="noopener">Map ↗</a></span>
+      <span class="meta">${esc(s.note)}</span>
+      <span class="meta">Km <input class="kmedit" data-km="${s.id}" value="${s.km}" inputmode="decimal" aria-label="Km for ${esc(s.name)}"> Walk <input class="kmedit" data-walk="${s.id}" value="${s.walk}" inputmode="numeric" aria-label="Walk minutes for ${esc(s.name)}"></span>
+    </span></li>`);});
+  $('#view').innerHTML=`<section class="card"><h2>The course</h2>
+    <p class="small muted">Seven towns along the coast, about 100 m of climbing, highest point on the Cap d’Antibes. Km positions are estimates except the start, Fort Carré (21.1) and the finish. Correct them from the official map and the plan follows.</p>
+    <ol class="ribbon">${rows.join('')}</ol>
+    <button class="btn ghost" id="resetKm">Reset km and walk times</button></section>`;
+  document.querySelectorAll('[data-km]').forEach(i=>i.onchange=()=>{const v=parseFloat(i.value.replace(',','.'));if(v>=0&&v<=FULL){S.km[i.dataset.km]=v;save();render();}});
+  document.querySelectorAll('[data-walk]').forEach(i=>i.onchange=()=>{const v=parseInt(i.value,10);if(v>=0&&v<120){S.walk[i.dataset.walk]=v;save();render();}});
+  $('#resetKm').onclick=()=>{S.km={};S.walk={};save();render();};}
+
+function setupView(){
+  const f=(id,label,val,extra='')=>`<div class="field"><label for="${id}">${label}</label><input id="${id}" value="${esc(val)}" ${extra}></div>`;
+  $('#view').innerHTML=`<section class="card"><h2>Runner</h2><div class="grid2">
+    ${f('runner','Name',S.runner)}${f('bib','Bib number',S.bib,'inputmode="numeric"')}
+    ${f('target','Target finish (h:mm:ss)',S.target)}${f('gun','Start gun (hh:mm)',S.gun)}
+    ${f('delay','Minutes to cross the start line',S.delay,'inputmode="numeric"')}${f('slow','Slow-down after last split (%)',S.slow,'inputmode="numeric"')}
+    </div>${f('tracking','Live tracking link',S.tracking,'inputmode="url"')}
+    <p class="small muted">Target pace: ${pace(targetPace())}. The main field starts at 08:03; runners further back can take several minutes to reach the line.</p></section>
+  <section class="card"><h2>You</h2><div class="grid2">
+    ${f('headway','Minutes between trains',S.headway,'inputmode="numeric"')}${f('buffer','Spare minutes you want',S.buffer,'inputmode="numeric"')}
+    </div><label class="check"><input type="checkbox" id="conservative" ${S.conservative?'checked':''}> Assume I just missed a train (safer)</label></section>
+  <section class="card"><h2>Reset</h2><div class="btns">
+    <button class="btn" id="clearSplits">Clear splits</button><button class="btn" id="resetAll">Reset everything</button></div>
+    <p class="small muted" id="msg" role="status"></p>
+    <p class="small muted">Everything is saved on this phone only.</p></section>`;
+  ['runner','bib','target','gun','delay','slow','tracking','headway','buffer'].forEach(id=>{$('#'+id).onchange=e=>{S[id]=e.target.value.trim();save();header();flash('Saved.');};});
+  $('#conservative').onchange=e=>{S.conservative=e.target.checked;save();flash('Saved.');};
+  $('#clearSplits').onclick=()=>{S.splits=[];save();flash('Splits cleared.');};
+  let armed=false;$('#resetAll').onclick=e=>{if(!armed){armed=true;e.target.textContent='Tap again to reset';return;}
+    S=Object.assign({},DEFAULTS,{km:{},walk:{},splits:[]});save();render();};}
+
+function render(){
+  const v=view();document.querySelectorAll('nav.tabs a').forEach(a=>a.setAttribute('aria-current',a.dataset.v===v?'page':'false'));
+  header();({now:nowView,plan:planView,course:courseView,setup:setupView})[v]();
+  if(flashMsg&&$('#msg'))$('#msg').textContent=flashMsg;}
+
+$('#simOn').onchange=e=>{S.simOn=e.target.checked;if(S.sim==null)S.sim=130;save();render();};
+$('#simT').oninput=e=>{S.sim=+e.target.value;S.simOn=true;save();flashMsg='';
+  const v=view();if(v==='now'||v==='plan'||v==='course')render();else header();};
+window.addEventListener('hashchange',()=>{flashMsg='';render();window.scrollTo(0,0);});
+setInterval(()=>{const a=document.activeElement;if(a&&(a.tagName==='INPUT'||a.tagName==='SELECT'))return header();
+  if(simActive())header();else if(view()==='setup')header();else render();},15000);
+setInterval(header,1000);
+render();
+})();
+</script>
+
+<script>
+if ('serviceWorker' in navigator && location.protocol === 'https:') {
+  navigator.serviceWorker.register('sw.js').catch(function(){});
+}
+</script>
+</body>
+</html>
